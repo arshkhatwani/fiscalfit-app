@@ -1,11 +1,14 @@
-import { View, Text } from 'react-native';
 import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import Login from '../components/Login';
+
+const Stack = createStackNavigator();
 
 const LoggedOutNavigation: React.FC = () => {
   return (
-    <View>
-      <Text>You are currently logged out</Text>
-    </View>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Login" component={Login} />
+    </Stack.Navigator>
   );
 };
 

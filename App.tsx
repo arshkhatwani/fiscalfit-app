@@ -1,18 +1,19 @@
-import React from 'react';
-import { SafeAreaView, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import LoggedInNavigation from './src/navigations/LoggedInNavigation';
-import LoggedOutNavigation from './src/navigations/LoggedOutNavigation';
+import React from 'react';
+import { SafeAreaView } from 'react-native';
+import { Provider } from 'react-redux';
+import RootNavigation from './src/navigations/Rootnavigation';
+import store from './src/redux/store';
 
 function App(): JSX.Element {
-  const isAuth = false;
-
   return (
-    <NavigationContainer>
-      <SafeAreaView>
-        {isAuth ? <LoggedInNavigation /> : <LoggedOutNavigation />}
-      </SafeAreaView>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <SafeAreaView style={{ flex: 1 }}>
+          <RootNavigation />
+        </SafeAreaView>
+      </NavigationContainer>
+    </Provider>
   );
 }
 

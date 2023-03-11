@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "196172180641",
+    "project_id": "fiscalfit-57fe1",
+    "storage_bucket": "fiscalfit-57fe1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:196172180641:android:45d1c774c05268ee3c54e0",
+        "android_client_info": {
+          "package_name": "com.fiscalfit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "196172180641-nluaedhj67vt2ego13806gqmogqm4ft4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6a9OR0Yydvaw6i1ajqXE0GBM21FhMguQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "196172180641-4itb088qfvtg9krmo1km39uukmr5bkpd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

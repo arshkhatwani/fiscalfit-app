@@ -3,7 +3,7 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import React, { useEffect } from 'react';
 import { Button } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { setAuth, setUser } from '../redux/slices/authSlice';
+import { logoutUser, setAuth, setUser } from '../redux/slices/authSlice';
 
 GoogleSignin.configure({
   webClientId:
@@ -28,6 +28,11 @@ const GoogleSignIn = () => {
   const dispatch = useDispatch();
 
   function onAuthStateChanged(user: any) {
+    if (user === null) {
+      dispatch(logoutUser());
+      return;
+    }
+
     const newUser: Object = {
       name: user.displayName,
       email: user.email,

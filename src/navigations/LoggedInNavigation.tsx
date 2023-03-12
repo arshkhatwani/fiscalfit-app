@@ -13,7 +13,11 @@ const Tab = createBottomTabNavigator();
 
 const LoggedInNavigation: React.FC = () => {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarLabelStyle: { fontFamily: 'Quicksand-SemiBold' },
+      }}>
       <Tab.Screen
         name="Home"
         component={Home}

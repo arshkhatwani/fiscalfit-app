@@ -5,11 +5,12 @@ import { Provider } from 'react-redux';
 import RootNavigation from './src/navigations/RootNavigation';
 import store from './src/redux/store';
 import { Provider as PaperProvider } from 'react-native-paper';
+import theme from './src/constants/appTheme';
 
 function App(): JSX.Element {
   return (
     <Provider store={store}>
-      <PaperProvider>
+      <PaperProvider theme={theme}>
         <NavigationContainer>
           <SafeAreaView style={{ flex: 1 }}>
             <RootNavigation />

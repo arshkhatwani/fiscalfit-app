@@ -4,7 +4,7 @@ import { font } from '../constants/fonts';
 const styles = {
   heading: {
     fontFamily: font.bold.fontFamily,
-    fontSize: 24,
+    fontSize: 22,
   },
 
   spendBtn: {

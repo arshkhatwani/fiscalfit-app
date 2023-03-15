@@ -1,4 +1,8 @@
-import { configureFonts, MD2LightTheme } from 'react-native-paper';
+import {
+  configureFonts,
+  MD2LightTheme,
+  DefaultTheme,
+} from 'react-native-paper';
 
 const font = {
   regular: {

@@ -9,6 +9,8 @@ import transactionCategories from '../../constants/transactionCategories';
 import styles from '../../styles/NewTransaction';
 import PrimaryBtn from '../Buttons/PrimaryBtn';
 import Dropdown from './Dropdown';
+import { DatePickerInput } from 'react-native-paper-dates';
+import BackBtn from '../Buttons/BackBtn';
 
 const categories = transactionCategories.map(item => ({
   label: item,
@@ -49,7 +51,10 @@ const NewTransaction = () => {
   return (
     <ScrollView>
       <View style={tw`px-5 pt-5`}>
-        <Text style={[styles.heading, tw`mb-7`]}>New Transaction</Text>
+        <View style={tw`flex flex-row items-center mb-7`}>
+          <BackBtn style={tw`mr-1.5`} />
+          <Text style={[styles.heading, tw`pb-1`]}>New Transaction</Text>
+        </View>
 
         <Formik
           initialValues={initialValues}
@@ -89,6 +94,7 @@ const NewTransaction = () => {
                   onChangeText={handleChange('price')}
                   onBlur={handleBlur('price')}
                   value={values.price}
+                  keyboardType="number-pad"
                 />
                 {errors.price && (
                   <HelperText type="error">{errors.price}</HelperText>
@@ -122,6 +128,20 @@ const NewTransaction = () => {
                   values={values}
                   setValues={setValues}
                   categories={categories}
+                />
+              </View>
+
+              <View style={tw`mb-6`}>
+                <Text style={[tw`mb-2`, styles.formLabel]}>Date</Text>
+                <DatePickerInput
+                  locale="en"
+                  value={values.date}
+                  onChange={(d: any) =>
+                    setValues({ ...values, date: new Date(d) })
+                  }
+                  inputMode="start"
+                  mode="outlined"
+                  calendarIcon="calendar"
                 />
               </View>
 

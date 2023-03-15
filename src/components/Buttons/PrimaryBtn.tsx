@@ -10,7 +10,7 @@ interface Props {
 
 const PrimaryBtn: FC<Props> = ({ style, label, onPress }) => {
   return (
-    <Button onPress={onPress} style={style}>
+    <Button mode="contained" onPress={onPress} style={style}>
       {label}
     </Button>
   );

@@ -2,12 +2,12 @@ import { Image } from 'react-native';
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
-import Transaction from '../screens/Transaction';
 import Plan from '../screens/Plan';
 import Budget from '../screens/Budget';
 import imagePaths from '../constants/imagePaths';
 import styles from '../styles/LoggedInNavigation';
 import { disabledColor } from '../constants/colors';
+import TransactionNavigation from './TransactionNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -36,7 +36,7 @@ const LoggedInNavigation: React.FC = () => {
       />
       <Tab.Screen
         name="Transaction"
-        component={Transaction}
+        component={TransactionNavigation}
         options={{
           tabBarActiveTintColor: '#000000',
           tabBarIcon: ({ focused }) => (

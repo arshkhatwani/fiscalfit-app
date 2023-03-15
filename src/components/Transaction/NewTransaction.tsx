@@ -1,18 +1,26 @@
+import { Formik } from 'formik';
 import React from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Button, HelperText, Text, TextInput } from 'react-native-paper';
 import tw from 'twrnc';
+import * as yup from 'yup';
+import transactionCategories from '../../constants/transactionCategories';
 import styles from '../../styles/NewTransaction';
 import PrimaryBtn from '../Buttons/PrimaryBtn';
-import * as yup from 'yup';
-import { Formik } from 'formik';
+import Dropdown from './Dropdown';
+
+const categories = transactionCategories.map(item => ({
+  label: item,
+  value: item,
+}));
 
 interface FormFields {
   name: string;
   price: string;
   spend: boolean;
   date: Date;
+  category: string;
 }
 
 const validationSchema = yup.object().shape({
@@ -34,22 +42,30 @@ const initialValues: FormFields = {
   price: '',
   spend: true,
   date: new Date(),
+  category: categories[0].value,
 };
 
 const NewTransaction = () => {
   return (
     <ScrollView>
-      <View style={tw`px-5 pt-3`}>
-        <Text style={[styles.heading, tw`mb-3`]}>New Transaction</Text>
+      <View style={tw`px-5 pt-5`}>
+        <Text style={[styles.heading, tw`mb-7`]}>New Transaction</Text>
 
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={(values: any) => {
-            console.log('submmit hua');
+            console.log('Submitted form');
             console.log(values);
           }}>
-          {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            errors,
+            setValues,
+          }) => (
             <>
               <View style={tw`mb-6`}>
                 <Text style={[styles.formLabel]}>Transaction Name</Text>
@@ -83,19 +99,30 @@ const NewTransaction = () => {
                 <Text style={[tw`mb-2`, styles.formLabel]}>Type</Text>
                 <View style={tw`flex flex-row justify-center`}>
                   <Button
-                    style={[tw`flex-1 mr-1`, styles.spendBtn]}
-                    mode="contained"
-                    onPress={() => {}}>
+                    style={[tw`flex-1 mr-1`, values.spend && styles.spendBtn]}
+                    mode="outlined"
+                    labelStyle={[values.spend && styles.btnLabelActive]}
+                    onPress={() => setValues({ ...values, spend: true })}>
                     Spend
                   </Button>
 
                   <Button
-                    style={[tw`flex-1 ml-1`, styles.earnBtn]}
-                    mode="contained"
-                    onPress={() => {}}>
+                    style={[tw`flex-1 ml-1`, !values.spend && styles.earnBtn]}
+                    mode="outlined"
+                    labelStyle={[!values.spend && styles.btnLabelActive]}
+                    onPress={() => setValues({ ...values, spend: false })}>
                     Earn
                   </Button>
                 </View>
+              </View>
+
+              <View style={tw`mb-6`}>
+                <Text style={[tw`mb-2`, styles.formLabel]}>Category</Text>
+                <Dropdown
+                  values={values}
+                  setValues={setValues}
+                  categories={categories}
+                />
               </View>
 
               <View>

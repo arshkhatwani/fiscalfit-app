@@ -1,3 +1,4 @@
+import { whiteColor } from '../constants/colors';
 import { font } from '../constants/fonts';
 
 const styles = {
@@ -8,10 +9,16 @@ const styles = {
 
   spendBtn: {
     backgroundColor: 'red',
+    borderColor: 'red',
   },
 
   earnBtn: {
     backgroundColor: 'green',
+    borderColor: 'green',
+  },
+
+  btnLabelActive: {
+    color: whiteColor,
   },
 
   formLabel: {

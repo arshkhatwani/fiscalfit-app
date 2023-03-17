@@ -11,13 +11,16 @@ import PrimaryBtn from '../Buttons/PrimaryBtn';
 import Dropdown from './Dropdown';
 import { DatePickerInput } from 'react-native-paper-dates';
 import BackBtn from '../Buttons/BackBtn';
+import { saveTransaction } from '../../redux/slices/transactionSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../redux/store';
 
 const categories = transactionCategories.map(item => ({
   label: item,
   value: item,
 }));
 
-interface FormFields {
+export interface FormFields {
   name: string;
   price: string;
   spend: boolean;
@@ -48,6 +51,8 @@ const initialValues: FormFields = {
 };
 
 const NewTransaction = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
   return (
     <ScrollView>
       <View style={tw`px-5 pt-5`}>
@@ -60,8 +65,7 @@ const NewTransaction = () => {
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={(values: any) => {
-            console.log('Submitted form');
-            console.log(values);
+            dispatch(saveTransaction(values));
           }}>
           {({
             handleChange,

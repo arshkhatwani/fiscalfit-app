@@ -1,5 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { TransactionBody } from '../../utils/convertToTransactionBody';
+import { sortByDateNewestFirst } from '../../utils/sortTransactionBodyArray';
 import { TransactionsState } from '../slices/transactionSlice';
 
 export const saveTransactionPending = (state: TransactionsState) => {
@@ -12,7 +13,7 @@ export const saveTransactionRejected = (
   action: PayloadAction<any>,
 ) => {
   state.isLoading = false;
-  console.log(action.payload.payload);
+  console.log(action.payload);
 };
 
 export const saveTransactionFulfilled = (
@@ -41,5 +42,5 @@ export const getTransactionsFulfilled = (
   action: PayloadAction<TransactionBody[]>,
 ) => {
   state.isLoading = true;
-  state.userTransactions = action.payload;
+  state.userTransactions = sortByDateNewestFirst(action.payload);
 };

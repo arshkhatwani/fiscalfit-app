@@ -7,7 +7,7 @@ import { getTransactions } from '../../redux/slices/transactionSlice';
 import TransactionItem from './TransactionItem';
 import tw from 'twrnc';
 import PillBtn from '../Buttons/PillBtn';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { NEW_TRANSACTION } from '../../constants/navigationLinks';
 import styles from '../../styles/UserTransactions';
 
@@ -17,10 +17,12 @@ const UserTransactions = () => {
     (state: RootState) => state.transactions,
   );
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
 
   useEffect(() => {
+    if (!isFocused) return;
     dispatch(getTransactions());
-  }, []);
+  }, [isFocused]);
 
   return (
     <View>

@@ -14,6 +14,7 @@ import BackBtn from '../Buttons/BackBtn';
 import { saveTransaction } from '../../redux/slices/transactionSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../redux/store';
+import { useNavigation } from '@react-navigation/native';
 
 const categories = transactionCategories.map(item => ({
   label: item,
@@ -52,6 +53,7 @@ const initialValues: FormFields = {
 
 const NewTransaction = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const navigation = useNavigation();
 
   return (
     <ScrollView>
@@ -66,6 +68,7 @@ const NewTransaction = () => {
           validationSchema={validationSchema}
           onSubmit={(values: any) => {
             dispatch(saveTransaction(values));
+            navigation.goBack();
           }}>
           {({
             handleChange,

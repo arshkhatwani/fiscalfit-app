@@ -1,13 +1,14 @@
-import { View } from 'react-native';
 import React from 'react';
-import TransactionItem from '../components/Transaction/TransactionItem';
+import { View } from 'react-native';
 import tw from 'twrnc';
-import { Divider } from 'react-native-paper';
+import TransactionHeader from '../components/Transaction/TransactionHeader';
 import UserTransactions from '../components/Transaction/UserTransactions';
 
 const Transaction = () => {
   return (
     <View>
+      <TransactionHeader />
+
       <View style={tw`px-5`}>
         <UserTransactions />
       </View>

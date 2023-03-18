@@ -4,7 +4,7 @@ import { TransactionsState } from '../slices/transactionSlice';
 
 export const saveTransactionPending = (state: TransactionsState) => {
   state.isLoading = true;
-  console.log('loading');
+  // console.log('loading');
 };
 
 export const saveTransactionRejected = (
@@ -25,7 +25,7 @@ export const saveTransactionFulfilled = (
 
 export const getTransactionsPending = (state: TransactionsState) => {
   state.isLoading = true;
-  console.log('loading');
+  // console.log('loading');
 };
 
 export const getTransactionsRejected = (

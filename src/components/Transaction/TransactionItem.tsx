@@ -6,8 +6,8 @@ import styles from '../../styles/TransactionItem';
 
 interface Props {
   heading: string;
-  price: string;
-  date: Date;
+  price: number;
+  date: string;
   spend: boolean;
 }
 
@@ -23,16 +23,14 @@ const TransactionItem: FC<Props> = ({ heading, price, date, spend }) => {
 
         <View>
           <Text style={styles.heading}>{heading}</Text>
-          <Text style={styles.date}>{`${date.getDate()}-${
-            date.getMonth() + 1
-          }-${date.getFullYear()}`}</Text>
+          <Text style={styles.date}>{date}</Text>
         </View>
       </View>
 
       <View>
         <Text style={[styles.price, styles.spendType(spend)]}>{`${
           spend ? '-' : '+'
-        }${price}`}</Text>
+        }₹${price}`}</Text>
       </View>
     </View>
   );

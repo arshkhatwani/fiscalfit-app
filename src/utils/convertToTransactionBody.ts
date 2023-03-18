@@ -1,10 +1,11 @@
 import { FormFields } from '../components/Transaction/NewTransaction';
+import formatDate from './formatDate';
 
 export interface TransactionBody {
   name: string;
   price: number;
   spend: boolean;
-  date: Date;
+  date: string;
   category: string;
   uid: string;
 }
@@ -14,7 +15,7 @@ const convertToTransactionBody = (body: FormFields, uid: string) => {
     name: body.name,
     price: parseInt(body.price),
     spend: body.spend,
-    date: body.date,
+    date: formatDate(body.date),
     category: body.category,
     uid: uid,
   };

@@ -1,9 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import firestore from '@react-native-firebase/firestore';
-import convertToTransactionBody from '../../utils/convertToTransactionBody';
+import convertToTransactionBody, {
+  TransactionBody,
+} from '../../utils/convertToTransactionBody';
 import { RootState } from '../store';
 import { FormFields } from '../../components/Transaction/NewTransaction';
 import {
+  getTransactionsFulfilled,
+  getTransactionsPending,
+  getTransactionsRejected,
   saveTransactionFulfilled,
   saveTransactionPending,
   saveTransactionRejected,
@@ -25,12 +30,33 @@ export const saveTransaction = createAsyncThunk<
   }
 });
 
+export const getTransactions = createAsyncThunk<
+  TransactionBody[],
+  void,
+  { state: RootState }
+>('transactions/getTransactions', async (_, thunkAPI) => {
+  try {
+    const uid = thunkAPI.getState().auth.user.uid;
+    const querySnapshot = await firestore()
+      .collection('Transactions')
+      .where('uid', '==', uid)
+      .get();
+    const userData = querySnapshot.docs.map(doc => doc.data());
+    return userData as TransactionBody[];
+  } catch (e) {
+    console.log(e);
+    return thunkAPI.rejectWithValue('Could not save transaction');
+  }
+});
+
 export interface TransactionsState {
   isLoading: boolean;
+  userTransactions: TransactionBody[];
 }
 
 const initialState: TransactionsState = {
   isLoading: false,
+  userTransactions: [],
 };
 
 const transactionSlice = createSlice({
@@ -41,6 +67,10 @@ const transactionSlice = createSlice({
     builder.addCase(saveTransaction.pending, saveTransactionPending);
     builder.addCase(saveTransaction.rejected, saveTransactionRejected);
     builder.addCase(saveTransaction.fulfilled, saveTransactionFulfilled);
+
+    builder.addCase(getTransactions.pending, getTransactionsPending);
+    builder.addCase(getTransactions.rejected, getTransactionsRejected);
+    builder.addCase(getTransactions.fulfilled, getTransactionsFulfilled);
   },
 });
 

@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 const TransactionNavigation: React.FC = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {/* <Stack.Screen name={TRANSACTION_HOME} component={Transaction} /> */}
+      <Stack.Screen name={TRANSACTION_HOME} component={Transaction} />
       <Stack.Screen name={NEW_TRANSACTION} component={NewTransaction} />
     </Stack.Navigator>
   );

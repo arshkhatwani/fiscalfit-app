@@ -8,5 +8,10 @@ export const whiteColor = '#ffffff';
 export const headerGradient = ['#000000', '#2C3E50'];
 
 export const greyHeading = '#b5b5b5';
+export const greyDarkHeading = '#636363';
 
 export const darkHeading = '#2C3E50';
+
+export const progressGradient = ['#380036', '#0CBABA'];
+
+export const progressEmpty = '#c2c2c2';

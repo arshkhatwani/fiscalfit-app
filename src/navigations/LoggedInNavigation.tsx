@@ -2,12 +2,13 @@ import { Image } from 'react-native';
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
-import Plan from '../screens/Plan';
 import Budget from '../screens/Budget';
 import imagePaths from '../constants/imagePaths';
 import styles from '../styles/LoggedInNavigation';
 import { disabledColor } from '../constants/colors';
 import TransactionNavigation from './TransactionNavigation';
+import PlanNavigation from './PlanNavigation';
+import { font } from '../constants/fonts';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,7 +17,7 @@ const LoggedInNavigation: React.FC = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarLabelStyle: { fontFamily: 'Quicksand-SemiBold' },
+        tabBarLabelStyle: { fontFamily: font.semiBold.fontFamily },
       }}>
       <Tab.Screen
         name="Home"
@@ -52,7 +53,7 @@ const LoggedInNavigation: React.FC = () => {
       />
       <Tab.Screen
         name="Plan"
-        component={Plan}
+        component={PlanNavigation}
         options={{
           tabBarActiveTintColor: '#000000',
           tabBarIcon: ({ focused }) => (

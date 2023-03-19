@@ -20,7 +20,11 @@ const styles = {
     height: 32,
     width: 32,
     borderRadius: 32,
-    backgroundColor: 'red',
+  },
+
+  imgIcon: {
+    width: '100%',
+    height: '100%',
   },
 
   container: {

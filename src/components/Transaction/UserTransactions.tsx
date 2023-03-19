@@ -44,6 +44,7 @@ const UserTransactions = () => {
               date={item.date}
               price={item.price}
               spend={item.spend}
+              category={item.category}
             />
 
             {index < userTransactions.length - 1 && (

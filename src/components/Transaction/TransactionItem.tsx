@@ -3,15 +3,27 @@ import { Text } from 'react-native-paper';
 import React, { FC } from 'react';
 import tw from 'twrnc';
 import styles from '../../styles/TransactionItem';
+import { Image } from 'react-native';
+import { categoriesIcons } from '../../constants/transactionCategories';
 
 interface Props {
   heading: string;
   price: number;
   date: string;
   spend: boolean;
+  category: string;
 }
 
-const TransactionItem: FC<Props> = ({ heading, price, date, spend }) => {
+const TransactionItem: FC<Props> = ({
+  heading,
+  price,
+  date,
+  spend,
+  category,
+}) => {
+  const categoryIcon =
+    categoriesIcons[category as keyof typeof categoriesIcons];
+
   return (
     <View
       style={[
@@ -19,7 +31,9 @@ const TransactionItem: FC<Props> = ({ heading, price, date, spend }) => {
         styles.container,
       ]}>
       <View style={tw`flex flex-row items-center`}>
-        <View style={[styles.icon, tw`mr-2`]}></View>
+        <View style={[styles.icon, tw`mr-2`]}>
+          <Image source={categoryIcon} style={styles.imgIcon} />
+        </View>
 
         <View>
           <Text style={styles.heading}>{heading}</Text>

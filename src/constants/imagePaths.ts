@@ -3,4 +3,18 @@ export default {
   transactionIcon: require('../assets/icons/transaction.png'),
   planIcon: require('../assets/icons/plan.png'),
   budgetIcon: require('../assets/icons/budget.png'),
+
+  icHousing: require('../assets/icons/housing.png'),
+  icFoodDining: require('../assets/icons/fooddining.png'),
+  icEntertainment: require('../assets/icons/entertainment.png'),
+  icPersonalCare: require('../assets/icons/personalcare.png'),
+  icUtilities: require('../assets/icons/utilities.png'),
+  icTravel: require('../assets/icons/travel.png'),
+  icEducation: require('../assets/icons/education.png'),
+  icGiftsDonations: require('../assets/icons/giftdonation.png'),
+  icSaveInvest: require('../assets/icons/saveinvest.png'),
+  icInsurance: require('../assets/icons/insurance.png'),
+  icTaxes: require('../assets/icons/taxes.png'),
+  icIncome: require('../assets/icons/income.png'),
+  icMiscellaneous: require('../assets/icons/miscellaneous.png'),
 };

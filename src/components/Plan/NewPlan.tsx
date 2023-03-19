@@ -9,6 +9,10 @@ import Dropdown from '../Transaction/Dropdown';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import planCategories from '../../constants/planCategories';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../redux/store';
+import { useNavigation } from '@react-navigation/native';
+import { savePlan } from '../../redux/slices/planSlice';
 
 export interface PlanFormFields {
   name: string;
@@ -22,7 +26,7 @@ const categories = planCategories.map(item => ({
 }));
 
 const validationSchema = yup.object().shape({
-  name: yup.string().min(2, 'Too short').required('Field is required'),
+  name: yup.string().trim().min(2, 'Too short').required('Field is required'),
   target: yup
     .string()
     .required('Field is required')
@@ -42,6 +46,9 @@ const initialValues: PlanFormFields = {
 };
 
 const NewPlan = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const navigation = useNavigation();
+
   return (
     <ScrollView>
       <View style={tw`px-5 pt-5`}>
@@ -54,7 +61,8 @@ const NewPlan = () => {
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={(values: any) => {
-            console.log(values);
+            // console.log(values);
+            dispatch(savePlan(values));
           }}>
           {({
             handleChange,

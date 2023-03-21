@@ -63,6 +63,7 @@ const NewPlan = () => {
           onSubmit={(values: any) => {
             // console.log(values);
             dispatch(savePlan(values));
+            navigation.goBack();
           }}>
           {({
             handleChange,

@@ -9,10 +9,13 @@ const styles = {
   },
 
   icon: {
-    height: 32,
-    width: 32,
-    borderRadius: 32,
-    backgroundColor: 'red',
+    height: 25,
+    width: 25,
+  },
+
+  imageIcon: {
+    width: '100%',
+    height: '100%',
   },
 
   currentSaving: {

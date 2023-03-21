@@ -17,4 +17,12 @@ export default {
   icTaxes: require('../assets/icons/taxes.png'),
   icIncome: require('../assets/icons/income.png'),
   icMiscellaneous: require('../assets/icons/miscellaneous.png'),
+
+  icBusinessInvestment: require('../assets/icons/business-or-investment.png'),
+  icEduPlan: require('../assets/icons/education-plan.png'),
+  icEmergencyFund: require('../assets/icons/emergency-fund.png'),
+  icRealEstatePlan: require('../assets/icons/house-real-estate.png'),
+  icRetirement: require('../assets/icons/retirement.png'),
+  icTravelVac: require('../assets/icons/travel-vacation-plan.png'),
+  icVehiclePlan: require('../assets/icons/vehicle-plan.png'),
 };

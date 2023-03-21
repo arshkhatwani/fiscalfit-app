@@ -40,6 +40,7 @@ const UserPlans = () => {
           heading={item.name}
           curDeposit={item.deposit}
           target={item.target}
+          category={item.category}
         />
       ))}
     </View>

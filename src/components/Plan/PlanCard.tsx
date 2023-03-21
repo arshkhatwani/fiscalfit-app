@@ -1,21 +1,27 @@
-import { View } from 'react-native';
+import { Image, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import React, { FC } from 'react';
 import tw from 'twrnc';
 import styles from '../../styles/PlanCard';
 import ProgressBar from '../ProgressBar';
+import { categoryIcons } from '../../constants/planCategories';
 
 interface Props {
   heading: string;
   target: number;
   curDeposit: number;
+  category: string;
 }
 
-const PlanCard: FC<Props> = ({ heading, target, curDeposit }) => {
+const PlanCard: FC<Props> = ({ heading, target, curDeposit, category }) => {
+  const categoryIcon = categoryIcons[category as keyof typeof categoryIcons];
+
   return (
     <View style={[tw`px-3 py-3 my-2`, styles.container]}>
       <View style={tw`flex flex-row items-center mb-3`}>
-        <View style={[styles.icon, tw`mr-2`]}></View>
+        <View style={[styles.icon, tw`mr-2`]}>
+          <Image style={styles.imageIcon} source={categoryIcon} />
+        </View>
 
         <View>
           <Text style={styles.heading}>{heading}</Text>

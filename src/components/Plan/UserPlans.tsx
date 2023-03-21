@@ -5,6 +5,7 @@ import { AppDispatch, RootState } from '../../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPlans } from '../../redux/slices/planSlice';
 import PlanCard from './PlanCard';
+import tw from 'twrnc';
 
 const UserPlans = () => {
   const isFocused = useIsFocused();
@@ -17,7 +18,7 @@ const UserPlans = () => {
     dispatch(getPlans());
   }, [isFocused]);
   return (
-    <View>
+    <View style={tw`px-5`}>
       {userPlans.map((item, index) => (
         <PlanCard
           key={index}

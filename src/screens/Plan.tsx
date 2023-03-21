@@ -1,14 +1,14 @@
-import { View } from 'react-native';
 import React from 'react';
-import PlanCard from '../components/Plan/PlanCard';
-import tw from 'twrnc';
+import { ScrollView } from 'react-native-gesture-handler';
+import PlanHeader from '../components/Plan/PlanHeader';
 import UserPlans from '../components/Plan/UserPlans';
 
 const Plan = () => {
   return (
-    <View style={tw`p-5`}>
+    <ScrollView stickyHeaderIndices={[0]}>
+      <PlanHeader />
       <UserPlans />
-    </View>
+    </ScrollView>
   );
 };
 

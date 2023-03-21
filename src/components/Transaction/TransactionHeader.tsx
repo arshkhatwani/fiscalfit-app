@@ -27,7 +27,7 @@ const TransactionHeader = () => {
         <View>
           <Text style={styles.balanceHeading}>TOTAL BALANCE</Text>
 
-          <Text style={styles.balance}>{`₹${totalBalance}`}</Text>
+          <Text style={styles.balance}>{`₹ ${totalBalance}`}</Text>
         </View>
       </LinearGradient>
     </View>

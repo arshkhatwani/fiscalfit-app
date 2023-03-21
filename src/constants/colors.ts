@@ -14,4 +14,4 @@ export const darkHeading = '#2C3E50';
 
 export const progressGradient = ['#380036', '#0CBABA'];
 
-export const progressEmpty = '#c2c2c2';
+export const progressEmpty = '#EEEEEE';

@@ -34,9 +34,9 @@ const UserPlans = () => {
         />
       </View>
 
-      {userPlans.map((item, index) => (
+      {userPlans.map(item => (
         <PlanCard
-          key={index}
+          key={item.pid}
           heading={item.name}
           curDeposit={item.deposit}
           target={item.target}

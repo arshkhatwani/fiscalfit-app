@@ -1,4 +1,5 @@
 import { PlanFormFields } from '../components/Plan/NewPlan';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface PlanBody {
   name: string;
@@ -7,6 +8,7 @@ export interface PlanBody {
   deposit: number;
   completed: boolean;
   uid: string;
+  pid: string;
 }
 
 const convertToPlanBody = (body: PlanFormFields, uid: string) => {
@@ -17,6 +19,7 @@ const convertToPlanBody = (body: PlanFormFields, uid: string) => {
     deposit: 0,
     completed: false,
     uid: uid,
+    pid: uuidv4(),
   };
   return res;
 };

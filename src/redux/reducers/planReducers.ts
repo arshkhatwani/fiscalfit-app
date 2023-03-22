@@ -43,3 +43,17 @@ export const getPlansFulfilled = (
   state.isLoading = true;
   state.userPlans = action.payload;
 };
+
+export const depositModalReducer = (
+  state: PlansState,
+  action: PayloadAction<boolean>,
+) => {
+  state.depositModalShow = action.payload;
+};
+
+export const depositPidReducer = (
+  state: PlansState,
+  action: PayloadAction<string>,
+) => {
+  state.depositPid = action.payload;
+};

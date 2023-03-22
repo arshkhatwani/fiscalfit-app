@@ -10,6 +10,7 @@ import PillBtn from '../Buttons/PillBtn';
 import { Text } from 'react-native-paper';
 import styles from '../../styles/UserTransactions';
 import { NEW_PLAN } from '../../constants/navigationLinks';
+import DepositModal from './DepositModal';
 
 const UserPlans = () => {
   const isFocused = useIsFocused();
@@ -41,8 +42,11 @@ const UserPlans = () => {
           curDeposit={item.deposit}
           target={item.target}
           category={item.category}
+          pid={item.pid}
         />
       ))}
+
+      <DepositModal />
     </View>
   );
 };

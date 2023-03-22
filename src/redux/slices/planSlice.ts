@@ -3,18 +3,22 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { PlanFormFields } from '../../components/Plan/NewPlan';
 import convertToPlanBody, { PlanBody } from '../../utils/convertToPlanBody';
 import {
+  depositModalReducer,
+  depositPidReducer,
   getPlansFulfilled,
   getPlansPending,
   getPlansRejected,
   savePlanFulfilled,
   savePlanPending,
-  savePlanRejected,
+  savePlanRejected
 } from '../reducers/planReducers';
 import { RootState } from '../store';
 
 export interface PlansState {
   isLoading: boolean;
   userPlans: PlanBody[];
+  depositModalShow: boolean;
+  depositPid: string;
 }
 
 export const savePlan = createAsyncThunk<
@@ -55,12 +59,17 @@ export const getPlans = createAsyncThunk<
 const initialState: PlansState = {
   isLoading: false,
   userPlans: [],
+  depositModalShow: false,
+  depositPid: '',
 };
 
 const planSlice = createSlice({
   name: 'plans',
   initialState,
-  reducers: {},
+  reducers: {
+    setDepositModalShow: depositModalReducer,
+    setDepositPid: depositPidReducer,
+  },
   extraReducers: builder => {
     builder.addCase(savePlan.pending, savePlanPending);
     builder.addCase(savePlan.rejected, savePlanRejected);
@@ -71,5 +80,7 @@ const planSlice = createSlice({
     builder.addCase(getPlans.fulfilled, getPlansFulfilled);
   },
 });
+
+export const { setDepositModalShow, setDepositPid } = planSlice.actions;
 
 export default planSlice;

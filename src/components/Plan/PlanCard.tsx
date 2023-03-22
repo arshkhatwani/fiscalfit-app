@@ -1,20 +1,33 @@
 import { Image, View } from 'react-native';
-import { Text } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
 import React, { FC } from 'react';
 import tw from 'twrnc';
 import styles from '../../styles/PlanCard';
 import ProgressBar from '../ProgressBar';
 import { categoryIcons } from '../../constants/planCategories';
+import { useAppDispatch } from '../../redux/store';
+import {
+  setDepositModalShow,
+  setDepositPid,
+} from '../../redux/slices/planSlice';
 
 interface Props {
   heading: string;
   target: number;
   curDeposit: number;
   category: string;
+  pid: string;
 }
 
-const PlanCard: FC<Props> = ({ heading, target, curDeposit, category }) => {
+const PlanCard: FC<Props> = ({
+  heading,
+  target,
+  curDeposit,
+  category,
+  pid,
+}) => {
   const categoryIcon = categoryIcons[category as keyof typeof categoryIcons];
+  const dispatch = useAppDispatch();
 
   return (
     <View style={[tw`px-3 py-3 my-2`, styles.container]}>
@@ -33,8 +46,18 @@ const PlanCard: FC<Props> = ({ heading, target, curDeposit, category }) => {
         <Text style={styles.targetAmt}>Target: ₹ {target}</Text>
       </View>
 
-      <View>
+      <View style={tw`mb-3`}>
         <ProgressBar curVal={curDeposit} maxVal={target} />
+      </View>
+
+      <View>
+        <Button
+          onPress={() => {
+            dispatch(setDepositPid(pid));
+            dispatch(setDepositModalShow(true));
+          }}>
+          Add deposit
+        </Button>
       </View>
     </View>
   );

@@ -64,3 +64,27 @@ export const prevDepositAmtReducer = (
 ) => {
   state.prevDepositAmt = action.payload;
 };
+
+export const addDepositPending = (state: PlansState) => {
+  state.isLoading = true;
+  // console.log('loading');
+};
+
+export const addDepositRejected = (
+  state: PlansState,
+  action: PayloadAction<unknown>,
+) => {
+  state.isLoading = false;
+  console.log(action.payload);
+};
+
+export const addDepositFulfilled = (
+  state: PlansState,
+  action: PayloadAction<string>,
+) => {
+  state.isLoading = false;
+  state.depositPid = '';
+  state.prevDepositAmt = 0;
+  state.depositModalShow = false;
+  console.log(action.payload);
+};

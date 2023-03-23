@@ -15,14 +15,17 @@ import DepositModal from './DepositModal';
 const UserPlans = () => {
   const isFocused = useIsFocused();
   const dispatch = useDispatch<AppDispatch>();
-  const { userPlans } = useSelector((state: RootState) => state.plans);
+  const { userPlans, depositModalShow } = useSelector(
+    (state: RootState) => state.plans,
+  );
   const navigation = useNavigation();
 
   useEffect(() => {
     if (!isFocused) return;
+    if (depositModalShow) return;
 
     dispatch(getPlans());
-  }, [isFocused]);
+  }, [isFocused, depositModalShow]);
   return (
     <View style={tw`px-5`}>
       <View

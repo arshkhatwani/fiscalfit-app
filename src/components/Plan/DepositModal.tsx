@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { HelperText, Modal, Portal, Text, TextInput } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 import tw from 'twrnc';
-import { setDepositModalShow } from '../../redux/slices/planSlice';
+import { addDeposit, setDepositModalShow } from '../../redux/slices/planSlice';
 import { RootState, useAppDispatch } from '../../redux/store';
 import * as yup from 'yup';
 import PrimaryBtn from '../Buttons/PrimaryBtn';
@@ -31,7 +31,7 @@ const validationSchema = yup.object().shape({
 });
 
 const DepositModal = () => {
-  const { depositModalShow, depositPid } = useSelector(
+  const { depositModalShow, depositPid, prevDepositAmt } = useSelector(
     (state: RootState) => state.plans,
   );
   const dispatch = useAppDispatch();
@@ -56,7 +56,9 @@ const DepositModal = () => {
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={(values: any) => {
-              console.log(values);
+              //   console.log(values);
+              const newDeposit = prevDepositAmt + parseInt(values.deposit);
+              dispatch(addDeposit({ pid: depositPid, deposit: newDeposit }));
             }}>
             {({ handleChange, handleBlur, values, errors, handleSubmit }) => (
               <>

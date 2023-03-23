@@ -3,6 +3,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { PlanFormFields } from '../../components/Plan/NewPlan';
 import convertToPlanBody, { PlanBody } from '../../utils/convertToPlanBody';
 import {
+  addDepositFulfilled,
+  addDepositPending,
+  addDepositRejected,
   depositModalReducer,
   depositPidReducer,
   getPlansFulfilled,
@@ -58,6 +61,30 @@ export const getPlans = createAsyncThunk<
   }
 });
 
+interface AddDepositBodyType {
+  pid: string;
+  deposit: number;
+}
+export const addDeposit = createAsyncThunk<
+  string,
+  AddDepositBodyType,
+  { state: RootState }
+>('plans/addDeposit', async (body: AddDepositBodyType, thunkAPI) => {
+  try {
+    const querySnapshot = await firestore()
+      .collection('Plans')
+      .where('pid', '==', body.pid)
+      .get();
+    querySnapshot.forEach(doc => {
+      doc.ref.update({ deposit: body.deposit });
+    });
+    return thunkAPI.fulfillWithValue('Deposit added!');
+  } catch (e) {
+    console.log(e);
+    return thunkAPI.rejectWithValue('Could not add deposit');
+  }
+});
+
 const initialState: PlansState = {
   isLoading: false,
   userPlans: [],
@@ -82,6 +109,10 @@ const planSlice = createSlice({
     builder.addCase(getPlans.pending, getPlansPending);
     builder.addCase(getPlans.rejected, getPlansRejected);
     builder.addCase(getPlans.fulfilled, getPlansFulfilled);
+
+    builder.addCase(addDeposit.pending, addDepositPending);
+    builder.addCase(addDeposit.rejected, addDepositRejected);
+    builder.addCase(addDeposit.fulfilled, addDepositFulfilled);
   },
 });
 

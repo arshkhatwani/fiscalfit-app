@@ -9,6 +9,7 @@ import { useAppDispatch } from '../../redux/store';
 import {
   setDepositModalShow,
   setDepositPid,
+  setPrevDpositAmt,
 } from '../../redux/slices/planSlice';
 
 interface Props {
@@ -54,6 +55,7 @@ const PlanCard: FC<Props> = ({
         <Button
           onPress={() => {
             dispatch(setDepositPid(pid));
+            dispatch(setPrevDpositAmt(curDeposit));
             dispatch(setDepositModalShow(true));
           }}>
           Add deposit

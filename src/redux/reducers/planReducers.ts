@@ -57,3 +57,10 @@ export const depositPidReducer = (
 ) => {
   state.depositPid = action.payload;
 };
+
+export const prevDepositAmtReducer = (
+  state: PlansState,
+  action: PayloadAction<number>,
+) => {
+  state.prevDepositAmt = action.payload;
+};

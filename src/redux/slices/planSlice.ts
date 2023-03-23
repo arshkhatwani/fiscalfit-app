@@ -8,9 +8,10 @@ import {
   getPlansFulfilled,
   getPlansPending,
   getPlansRejected,
+  prevDepositAmtReducer,
   savePlanFulfilled,
   savePlanPending,
-  savePlanRejected
+  savePlanRejected,
 } from '../reducers/planReducers';
 import { RootState } from '../store';
 
@@ -19,6 +20,7 @@ export interface PlansState {
   userPlans: PlanBody[];
   depositModalShow: boolean;
   depositPid: string;
+  prevDepositAmt: number;
 }
 
 export const savePlan = createAsyncThunk<
@@ -61,6 +63,7 @@ const initialState: PlansState = {
   userPlans: [],
   depositModalShow: false,
   depositPid: '',
+  prevDepositAmt: 0,
 };
 
 const planSlice = createSlice({
@@ -69,6 +72,7 @@ const planSlice = createSlice({
   reducers: {
     setDepositModalShow: depositModalReducer,
     setDepositPid: depositPidReducer,
+    setPrevDpositAmt: prevDepositAmtReducer,
   },
   extraReducers: builder => {
     builder.addCase(savePlan.pending, savePlanPending);
@@ -81,6 +85,7 @@ const planSlice = createSlice({
   },
 });
 
-export const { setDepositModalShow, setDepositPid } = planSlice.actions;
+export const { setDepositModalShow, setDepositPid, setPrevDpositAmt } =
+  planSlice.actions;
 
 export default planSlice;

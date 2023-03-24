@@ -1,12 +1,12 @@
 import { Formik } from 'formik';
 import React from 'react';
 import { View } from 'react-native';
-import { HelperText, Modal, Portal, Text, TextInput } from 'react-native-paper';
+import { HelperText, Modal, Portal, TextInput } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 import tw from 'twrnc';
+import * as yup from 'yup';
 import { addDeposit, setDepositModalShow } from '../../redux/slices/planSlice';
 import { RootState, useAppDispatch } from '../../redux/store';
-import * as yup from 'yup';
 import PrimaryBtn from '../Buttons/PrimaryBtn';
 
 export interface DepositFormFields {
@@ -17,24 +17,32 @@ const initialValues: DepositFormFields = {
   deposit: '',
 };
 
-const validationSchema = yup.object().shape({
-  deposit: yup
-    .string()
-    .required('Field is required')
-    .test('is-number', 'Field must be a valid number', value => {
-      const number = Number(value);
-      if (Number.isNaN(number)) {
-        return false;
-      }
-      return true;
-    }),
-});
-
 const DepositModal = () => {
-  const { depositModalShow, depositPid, prevDepositAmt } = useSelector(
+  const { depositModalShow, depositPid, userPlans } = useSelector(
     (state: RootState) => state.plans,
   );
   const dispatch = useAppDispatch();
+  const planObj = userPlans.find(pl => pl.pid === depositPid);
+  const prevDepositAmt = planObj ? planObj.deposit : 0;
+  const target = planObj ? planObj.target : 0;
+
+  const validationSchema = yup.object().shape({
+    deposit: yup
+      .string()
+      .required('Field is required')
+      .test('is-number', 'Field must be a valid number', value => {
+        const number = Number(value);
+        if (Number.isNaN(number)) {
+          return false;
+        }
+        return true;
+      })
+      .test('is-in-limit', 'Enter amount less that remaining target', value => {
+        const number = Number(value);
+        if (target - prevDepositAmt < number) return false;
+        return true;
+      }),
+  });
 
   const hideModal = () => dispatch(setDepositModalShow(false));
 

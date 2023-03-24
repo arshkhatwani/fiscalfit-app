@@ -58,13 +58,6 @@ export const depositPidReducer = (
   state.depositPid = action.payload;
 };
 
-export const prevDepositAmtReducer = (
-  state: PlansState,
-  action: PayloadAction<number>,
-) => {
-  state.prevDepositAmt = action.payload;
-};
-
 export const addDepositPending = (state: PlansState) => {
   state.isLoading = true;
   // console.log('loading');
@@ -84,7 +77,6 @@ export const addDepositFulfilled = (
 ) => {
   state.isLoading = false;
   state.depositPid = '';
-  state.prevDepositAmt = 0;
   state.depositModalShow = false;
   console.log(action.payload);
 };

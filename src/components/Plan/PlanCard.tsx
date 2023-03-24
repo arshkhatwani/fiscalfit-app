@@ -7,6 +7,7 @@ import ProgressBar from '../ProgressBar';
 import { categoryIcons } from '../../constants/planCategories';
 import { useAppDispatch } from '../../redux/store';
 import {
+  completePlan,
   setDepositModalShow,
   setDepositPid,
 } from '../../redux/slices/planSlice';
@@ -17,6 +18,7 @@ interface Props {
   curDeposit: number;
   category: string;
   pid: string;
+  completed: boolean;
 }
 
 const PlanCard: FC<Props> = ({
@@ -25,6 +27,7 @@ const PlanCard: FC<Props> = ({
   curDeposit,
   category,
   pid,
+  completed,
 }) => {
   const categoryIcon = categoryIcons[category as keyof typeof categoryIcons];
   const dispatch = useAppDispatch();
@@ -50,15 +53,25 @@ const PlanCard: FC<Props> = ({
         <ProgressBar curVal={curDeposit} maxVal={target} />
       </View>
 
-      <View>
-        <Button
-          onPress={() => {
-            dispatch(setDepositPid(pid));
-            dispatch(setDepositModalShow(true));
-          }}>
-          Add deposit
-        </Button>
-      </View>
+      {target > curDeposit && (
+        <View>
+          <Button
+            onPress={() => {
+              dispatch(setDepositPid(pid));
+              dispatch(setDepositModalShow(true));
+            }}>
+            Add deposit
+          </Button>
+        </View>
+      )}
+
+      {!completed && target == curDeposit && (
+        <View>
+          <Button onPress={() => dispatch(completePlan(pid))}>
+            Complete Plan
+          </Button>
+        </View>
+      )}
     </View>
   );
 };

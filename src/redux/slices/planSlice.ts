@@ -6,6 +6,9 @@ import {
   addDepositFulfilled,
   addDepositPending,
   addDepositRejected,
+  completePlanFulfilled,
+  completePlanPending,
+  completePlanRejected,
   depositModalReducer,
   depositPidReducer,
   getPlansFulfilled,
@@ -83,6 +86,26 @@ export const addDeposit = createAsyncThunk<
   }
 });
 
+export const completePlan = createAsyncThunk<
+  string,
+  string,
+  { state: RootState }
+>('plans/completePlan', async (pid: string, thunkAPI) => {
+  try {
+    const querySnapshot = await firestore()
+      .collection('Plans')
+      .where('pid', '==', pid)
+      .get();
+    querySnapshot.forEach(doc => {
+      doc.ref.update({ completed: true });
+    });
+    return thunkAPI.fulfillWithValue('Plan completed!');
+  } catch (e) {
+    console.log(e);
+    return thunkAPI.rejectWithValue('Could complete plan');
+  }
+});
+
 const initialState: PlansState = {
   isLoading: false,
   userPlans: [],
@@ -109,6 +132,10 @@ const planSlice = createSlice({
     builder.addCase(addDeposit.pending, addDepositPending);
     builder.addCase(addDeposit.rejected, addDepositRejected);
     builder.addCase(addDeposit.fulfilled, addDepositFulfilled);
+
+    builder.addCase(completePlan.pending, completePlanPending);
+    builder.addCase(completePlan.rejected, completePlanRejected);
+    builder.addCase(completePlan.fulfilled, completePlanFulfilled);
   },
 });
 

@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { AppDispatch, RootState } from '../../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,7 +7,7 @@ import { getPlans } from '../../redux/slices/planSlice';
 import PlanCard from './PlanCard';
 import tw from 'twrnc';
 import PillBtn from '../Buttons/PillBtn';
-import { Text } from 'react-native-paper';
+import { Text, Switch } from 'react-native-paper';
 import styles from '../../styles/UserTransactions';
 import { NEW_PLAN } from '../../constants/navigationLinks';
 import DepositModal from './DepositModal';
@@ -19,6 +19,9 @@ const UserPlans = () => {
     (state: RootState) => state.plans,
   );
   const navigation = useNavigation();
+
+  const [showCompleted, setShowCompleted] = useState<boolean>(false);
+  const onToggleSwitch = () => setShowCompleted(!showCompleted);
 
   useEffect(() => {
     if (!isFocused) return;
@@ -38,16 +41,26 @@ const UserPlans = () => {
         />
       </View>
 
-      {userPlans.map(item => (
-        <PlanCard
-          key={item.pid}
-          heading={item.name}
-          curDeposit={item.deposit}
-          target={item.target}
-          category={item.category}
-          pid={item.pid}
-        />
-      ))}
+      <View style={tw`flex flex-row items-center mb-4`}>
+        <Text style={tw`mr-2`}>Completed Plans</Text>
+        <Switch value={showCompleted} onValueChange={onToggleSwitch} />
+      </View>
+
+      {userPlans.map(item => {
+        return (
+          item.completed === showCompleted && (
+            <PlanCard
+              key={item.pid}
+              heading={item.name}
+              curDeposit={item.deposit}
+              target={item.target}
+              category={item.category}
+              pid={item.pid}
+              completed={item.completed}
+            />
+          )
+        );
+      })}
 
       <DepositModal />
     </View>

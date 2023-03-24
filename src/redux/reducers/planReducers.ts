@@ -80,3 +80,26 @@ export const addDepositFulfilled = (
   state.depositModalShow = false;
   console.log(action.payload);
 };
+
+export const completePlanPending = (state: PlansState) => {
+  state.isLoading = true;
+  // console.log('loading');
+};
+
+export const completePlanRejected = (
+  state: PlansState,
+  action: PayloadAction<unknown>,
+) => {
+  state.isLoading = false;
+  console.log(action.payload);
+};
+
+export const completePlanFulfilled = (
+  state: PlansState,
+  action: PayloadAction<string>,
+) => {
+  state.isLoading = false;
+  state.depositPid = '';
+  state.depositModalShow = false;
+  console.log(action.payload);
+};

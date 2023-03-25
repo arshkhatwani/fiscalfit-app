@@ -62,15 +62,11 @@ export const getPlans = createAsyncThunk<
   }
 });
 
-interface AddDepositBodyType {
-  pid: string;
-  deposit: number;
-}
 export const addDeposit = createAsyncThunk<
   string,
-  AddDepositBodyType,
+  { pid: string; deposit: number },
   { state: RootState }
->('plans/addDeposit', async (body: AddDepositBodyType, thunkAPI) => {
+>('plans/addDeposit', async (body, thunkAPI) => {
   try {
     const querySnapshot = await firestore()
       .collection('Plans')

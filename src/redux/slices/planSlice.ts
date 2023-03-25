@@ -87,7 +87,7 @@ export const addDeposit = createAsyncThunk<
 });
 
 export const completePlan = createAsyncThunk<
-  string,
+  { pid: string; message: string },
   string,
   { state: RootState }
 >('plans/completePlan', async (pid: string, thunkAPI) => {
@@ -99,7 +99,7 @@ export const completePlan = createAsyncThunk<
     querySnapshot.forEach(doc => {
       doc.ref.update({ completed: true });
     });
-    return thunkAPI.fulfillWithValue('Plan completed!');
+    return thunkAPI.fulfillWithValue({ pid: pid, message: 'Plan completed!' });
   } catch (e) {
     console.log(e);
     return thunkAPI.rejectWithValue('Could complete plan');

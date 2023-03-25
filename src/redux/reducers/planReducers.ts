@@ -96,10 +96,14 @@ export const completePlanRejected = (
 
 export const completePlanFulfilled = (
   state: PlansState,
-  action: PayloadAction<string>,
+  action: PayloadAction<{ pid: string; message: string }>,
 ) => {
+  const { pid } = action.payload;
+  const idx = state.userPlans.findIndex(plan => plan.pid === pid);
+  state.userPlans[idx].completed = true;
+
   state.isLoading = false;
   state.depositPid = '';
   state.depositModalShow = false;
-  console.log(action.payload);
+  console.log(action.payload.message);
 };

@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import authSlice from './slices/authSlice';
+import budgetSlice from './slices/budgetSlice';
 import planSlice from './slices/planSlice';
 import transactionSlice from './slices/transactionSlice';
 
@@ -9,6 +10,7 @@ const store = configureStore({
     auth: authSlice.reducer,
     transactions: transactionSlice.reducer,
     plans: planSlice.reducer,
+    budget: budgetSlice.reducer,
   },
 });
 

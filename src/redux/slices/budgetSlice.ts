@@ -1,8 +1,13 @@
 import firestore from '@react-native-firebase/firestore';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { BudgetFormFields } from '../../components/Budget/NewBudget';
-import convertToBudgetBody from '../../utils/convertToBudgetBody';
+import convertToBudgetBody, {
+  BudgetBody,
+} from '../../utils/convertToBudgetBody';
 import {
+  getBudgetsFulfilled,
+  getBudgetsPending,
+  getBudgetsRejected,
   saveBudgetFulfilled,
   saveBudgetPending,
   saveBudgetRejected,
@@ -11,6 +16,7 @@ import { RootState } from '../store';
 
 export interface BudgetState {
   isLoading: boolean;
+  userBudgets: BudgetBody[];
 }
 
 export const saveBudget = createAsyncThunk<
@@ -25,11 +31,30 @@ export const saveBudget = createAsyncThunk<
     return thunkAPI.fulfillWithValue('Budget added!');
   } catch (e) {
     console.log(e);
-    return thunkAPI.rejectWithValue('Could not save Budget');
+    return thunkAPI.rejectWithValue('Could not save budget');
   }
 });
 
-const initialState: BudgetState = { isLoading: false };
+export const getBudgets = createAsyncThunk<
+  BudgetBody[],
+  void,
+  { state: RootState }
+>('budget/getBudgets', async (_, thunkAPI) => {
+  try {
+    const uid = thunkAPI.getState().auth.user.uid;
+    const querySnapshot = await firestore()
+      .collection('Budget')
+      .where('uid', '==', uid)
+      .get();
+    const userData = querySnapshot.docs.map(doc => doc.data());
+    return userData as BudgetBody[];
+  } catch (e) {
+    console.log(e);
+    return thunkAPI.rejectWithValue('Could not get budgets');
+  }
+});
+
+const initialState: BudgetState = { isLoading: false, userBudgets: [] };
 
 const budgetSlice = createSlice({
   name: 'budget',
@@ -39,6 +64,10 @@ const budgetSlice = createSlice({
     builder.addCase(saveBudget.pending, saveBudgetPending);
     builder.addCase(saveBudget.rejected, saveBudgetRejected);
     builder.addCase(saveBudget.fulfilled, saveBudgetFulfilled);
+
+    builder.addCase(getBudgets.pending, getBudgetsPending);
+    builder.addCase(getBudgets.rejected, getBudgetsRejected);
+    builder.addCase(getBudgets.fulfilled, getBudgetsFulfilled);
   },
 });
 

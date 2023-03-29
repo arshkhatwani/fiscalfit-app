@@ -11,6 +11,7 @@ import Dropdown from '../Transaction/Dropdown';
 import transactionCategories from '../../constants/transactionCategories';
 import * as yup from 'yup';
 import { saveBudget } from '../../redux/slices/budgetSlice';
+import { useNavigation } from '@react-navigation/native';
 
 const categories = transactionCategories.map(item => ({
   label: item,
@@ -47,6 +48,7 @@ const validationSchema = yup.object().shape({
 
 const NewBudget = () => {
   const dispatch = useAppDispatch();
+  const navigation = useNavigation();
 
   return (
     <ScrollView>
@@ -62,6 +64,7 @@ const NewBudget = () => {
           onSubmit={(values: any) => {
             // console.log(values);
             dispatch(saveBudget(values));
+            navigation.goBack();
           }}>
           {({
             handleChange,

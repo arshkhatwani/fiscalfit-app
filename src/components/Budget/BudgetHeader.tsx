@@ -16,7 +16,7 @@ const BudgetHeader = () => {
         <Text style={[styles.heading, tw`mb-6`]}>Budget</Text>
 
         <View>
-          <Text style={styles.balanceHeading}>TOTAL REMAINING</Text>
+          <Text style={styles.balanceHeading}>TOTAL BUDGET</Text>
 
           <Text style={styles.balance}>{`₹ 20000`}</Text>
         </View>

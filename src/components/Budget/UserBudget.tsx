@@ -7,6 +7,7 @@ import { NEW_BUDGET } from '../../constants/navigationLinks';
 import { useAppDispatch } from '../../redux/store';
 import styles from '../../styles/UserTransactions';
 import PillBtn from '../Buttons/PillBtn';
+import BudgetCard from './BudgetCard';
 
 const UserBudget = () => {
   const dispatch = useAppDispatch();
@@ -29,7 +30,7 @@ const UserBudget = () => {
         />
       </View>
 
-      {/* show budget cards */}
+      <BudgetCard category="Entertainment" target={1000} bid="xyz" />
     </View>
   );
 };

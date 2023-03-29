@@ -1,14 +1,14 @@
-import { Image } from 'react-native';
-import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from '../screens/Home';
-import Budget from '../screens/Budget';
-import imagePaths from '../constants/imagePaths';
-import styles from '../styles/LoggedInNavigation';
+import React from 'react';
+import { Image } from 'react-native';
 import { disabledColor } from '../constants/colors';
-import TransactionNavigation from './TransactionNavigation';
-import PlanNavigation from './PlanNavigation';
 import { font } from '../constants/fonts';
+import imagePaths from '../constants/imagePaths';
+import Home from '../screens/Home';
+import styles from '../styles/LoggedInNavigation';
+import BudgetNavigation from './BudgetNavigation';
+import PlanNavigation from './PlanNavigation';
+import TransactionNavigation from './TransactionNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -69,7 +69,7 @@ const LoggedInNavigation: React.FC = () => {
       />
       <Tab.Screen
         name="Budget"
-        component={Budget}
+        component={BudgetNavigation}
         options={{
           tabBarActiveTintColor: '#000000',
           tabBarIcon: ({ focused }) => (

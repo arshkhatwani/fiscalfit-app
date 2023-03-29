@@ -45,7 +45,7 @@ export const getTransactions = createAsyncThunk<
     return userData as TransactionBody[];
   } catch (e) {
     console.log(e);
-    return thunkAPI.rejectWithValue('Could not save transaction');
+    return thunkAPI.rejectWithValue('Could not get transactions');
   }
 });
 

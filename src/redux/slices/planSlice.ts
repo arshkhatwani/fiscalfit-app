@@ -58,7 +58,7 @@ export const getPlans = createAsyncThunk<
     return userData as PlanBody[];
   } catch (e) {
     console.log(e);
-    return thunkAPI.rejectWithValue('Could not save transaction');
+    return thunkAPI.rejectWithValue('Could not get plans');
   }
 });
 
@@ -98,7 +98,7 @@ export const completePlan = createAsyncThunk<
     return thunkAPI.fulfillWithValue({ pid: pid, message: 'Plan completed!' });
   } catch (e) {
     console.log(e);
-    return thunkAPI.rejectWithValue('Could complete plan');
+    return thunkAPI.rejectWithValue('Could not complete plan');
   }
 });
 

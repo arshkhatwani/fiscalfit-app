@@ -1,11 +1,14 @@
-import { View, Text } from 'react-native';
 import React from 'react';
+import { ScrollView } from 'react-native';
+import BudgetHeader from '../components/Budget/BudgetHeader';
+import UserBudget from '../components/Budget/UserBudget';
 
 const Budget = () => {
   return (
-    <View>
-      <Text>Budget</Text>
-    </View>
+    <ScrollView stickyHeaderIndices={[0]}>
+      <BudgetHeader />
+      <UserBudget />
+    </ScrollView>
   );
 };
 

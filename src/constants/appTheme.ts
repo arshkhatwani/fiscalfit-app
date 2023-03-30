@@ -36,6 +36,12 @@ const fontConfig: Object = {
 const theme: Object = {
   ...MD2LightTheme,
   fonts: configureFonts({ config: fontConfig, isV3: false }),
+  roundness: 10,
+  colors: {
+    ...MD2LightTheme.colors,
+    primary: '#12263b',
+    accent: '#24405e',
+  },
 };
 
 export default theme;

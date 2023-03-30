@@ -5,6 +5,7 @@ import convertToBudgetBody, {
   BudgetBody,
 } from '../../utils/convertToBudgetBody';
 import {
+  categoryTransactionsReducer,
   getBudgetsFulfilled,
   getBudgetsPending,
   getBudgetsRejected,
@@ -17,6 +18,9 @@ import { RootState } from '../store';
 export interface BudgetState {
   isLoading: boolean;
   userBudgets: BudgetBody[];
+  categoryTransactions: {
+    [key: string]: number;
+  };
 }
 
 export const saveBudget = createAsyncThunk<
@@ -54,12 +58,18 @@ export const getBudgets = createAsyncThunk<
   }
 });
 
-const initialState: BudgetState = { isLoading: false, userBudgets: [] };
+const initialState: BudgetState = {
+  isLoading: false,
+  userBudgets: [],
+  categoryTransactions: {},
+};
 
 const budgetSlice = createSlice({
   name: 'budget',
   initialState,
-  reducers: {},
+  reducers: {
+    getCategoryTransactions: categoryTransactionsReducer,
+  },
   extraReducers: builder => {
     builder.addCase(saveBudget.pending, saveBudgetPending);
     builder.addCase(saveBudget.rejected, saveBudgetRejected);
@@ -70,5 +80,7 @@ const budgetSlice = createSlice({
     builder.addCase(getBudgets.fulfilled, getBudgetsFulfilled);
   },
 });
+
+export const { getCategoryTransactions } = budgetSlice.actions;
 
 export default budgetSlice;

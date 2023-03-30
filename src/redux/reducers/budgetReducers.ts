@@ -1,5 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit';
+import transactionCategories from '../../constants/transactionCategories';
 import { BudgetBody } from '../../utils/convertToBudgetBody';
+import { TransactionBody } from '../../utils/convertToTransactionBody';
 import { BudgetState } from '../slices/budgetSlice';
 
 export const saveBudgetPending = (state: BudgetState) => {
@@ -42,4 +44,22 @@ export const getBudgetsFulfilled = (
 ) => {
   state.isLoading = true;
   state.userBudgets = action.payload;
+};
+
+export const categoryTransactionsReducer = (
+  state: BudgetState,
+  action: PayloadAction<TransactionBody[]>,
+) => {
+  let categoryTransactions: { [key: string]: number } = {};
+
+  transactionCategories.forEach(category => {
+    categoryTransactions[category] = 0;
+  });
+
+  action.payload.forEach(transaction => {
+    transaction.spend &&
+      (categoryTransactions[transaction.category] += transaction.price);
+  });
+
+  state.categoryTransactions = categoryTransactions;
 };

@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import { Image, View } from 'react-native';
 import { Text } from 'react-native-paper';
+import { useSelector } from 'react-redux';
 import tw from 'twrnc';
 import { categoriesIcons } from '../../constants/transactionCategories';
-import { useAppDispatch } from '../../redux/store';
+import { RootState, useAppDispatch } from '../../redux/store';
 import styles from '../../styles/PlanCard';
 import ProgressBar from '../ProgressBar';
 
@@ -14,9 +15,13 @@ interface Props {
 }
 
 const BudgetCard: FC<Props> = ({ category, target }) => {
+  const { categoryTransactions } = useSelector(
+    (state: RootState) => state.budget,
+  );
   const categoryIcon =
     categoriesIcons[category as keyof typeof categoriesIcons];
-  const dispatch = useAppDispatch();
+
+  const spend = categoryTransactions[category];
 
   return (
     <View style={[tw`px-3 py-3 my-2`, styles.container]}>
@@ -32,11 +37,11 @@ const BudgetCard: FC<Props> = ({ category, target }) => {
 
       <View style={tw`flex flex-row items-center justify-between mb-3`}>
         <Text style={styles.currentSaving}>Budget ₹ {target}</Text>
-        <Text style={styles.targetAmt}>Remaining ₹ {target - 10}</Text>
+        <Text style={styles.targetAmt}>Remaining ₹ {target - spend}</Text>
       </View>
 
       <View style={tw`mb-3`}>
-        <ProgressBar curVal={10} maxVal={target} />
+        <ProgressBar curVal={spend} maxVal={target} />
       </View>
     </View>
   );

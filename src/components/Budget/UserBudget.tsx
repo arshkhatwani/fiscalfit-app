@@ -5,7 +5,11 @@ import { Text } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 import tw from 'twrnc';
 import { NEW_BUDGET } from '../../constants/navigationLinks';
-import { getBudgets } from '../../redux/slices/budgetSlice';
+import {
+  getBudgets,
+  getCategoryTransactions,
+} from '../../redux/slices/budgetSlice';
+import { getTransactions } from '../../redux/slices/transactionSlice';
 import { RootState, useAppDispatch } from '../../redux/store';
 import styles from '../../styles/UserTransactions';
 import PillBtn from '../Buttons/PillBtn';
@@ -17,11 +21,19 @@ const UserBudget = () => {
   const isFocused = useIsFocused();
 
   const { userBudgets } = useSelector((state: RootState) => state.budget);
+  const { userTransactions } = useSelector(
+    (state: RootState) => state.transactions,
+  );
 
   useEffect(() => {
     if (!isFocused) return;
+    dispatch(getTransactions());
     dispatch(getBudgets());
   }, [isFocused]);
+
+  useEffect(() => {
+    dispatch(getCategoryTransactions(userTransactions));
+  }, [userTransactions]);
 
   return (
     <View style={tw`px-5`}>

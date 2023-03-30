@@ -4,7 +4,7 @@ import { Text } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 import tw from 'twrnc';
 import { categoriesIcons } from '../../constants/transactionCategories';
-import { RootState, useAppDispatch } from '../../redux/store';
+import { RootState } from '../../redux/store';
 import styles from '../../styles/PlanCard';
 import ProgressBar from '../ProgressBar';
 

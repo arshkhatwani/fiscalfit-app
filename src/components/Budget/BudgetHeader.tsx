@@ -1,11 +1,17 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { useSelector } from 'react-redux';
 import tw from 'twrnc';
 import { headerGradient } from '../../constants/colors';
+import { RootState } from '../../redux/store';
 import styles from '../../styles/TransactionHeader';
+import getTotalBudget from '../../utils/getTotalBudget';
 
 const BudgetHeader = () => {
+  const { userBudgets } = useSelector((state: RootState) => state.budget);
+  const totalBudget = getTotalBudget(userBudgets);
+
   return (
     <View>
       <LinearGradient
@@ -18,7 +24,7 @@ const BudgetHeader = () => {
         <View>
           <Text style={styles.balanceHeading}>TOTAL BUDGET</Text>
 
-          <Text style={styles.balance}>{`₹ 20000`}</Text>
+          <Text style={styles.balance}>{`₹ ${totalBudget}`}</Text>
         </View>
       </LinearGradient>
     </View>

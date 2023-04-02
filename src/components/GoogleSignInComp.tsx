@@ -1,9 +1,13 @@
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import React, { useEffect } from 'react';
-import { Button } from 'react-native';
+import { Image, Pressable, View } from 'react-native';
+import { Text } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
+import tw from 'twrnc';
+import imagePaths from '../constants/imagePaths';
 import { logoutUser, setAuth, setUser } from '../redux/slices/authSlice';
+import styles from '../styles/Login';
 
 GoogleSignin.configure({
   webClientId:
@@ -24,7 +28,7 @@ async function onGoogleButtonPress() {
   return auth().signInWithCredential(googleCredential);
 }
 
-const GoogleSignIn = () => {
+const GoogleSignInComp = () => {
   const dispatch = useDispatch();
 
   function onAuthStateChanged(user: any) {
@@ -49,16 +53,28 @@ const GoogleSignIn = () => {
     return subscriber; // unsubscribe on unmount
   }, []);
 
+  const onPress = () =>
+    onGoogleButtonPress()
+      .then(() => console.log('Signed in with Google!'))
+      .catch(e => console.log(e));
+
   return (
-    <Button
-      title="Google Sign-In"
-      onPress={() =>
-        onGoogleButtonPress()
-          .then(() => console.log('Signed in with Google!'))
-          .catch(e => console.log(e))
-      }
-    />
+    <Pressable onPress={onPress}>
+      <View
+        style={[
+          styles.googleBtnContainer,
+          tw`flex flex-row items-center justify-center px-3 py-2`,
+        ]}>
+        <Image
+          source={imagePaths.icGoogle}
+          style={[styles.googleIcon, tw`mr-2`]}
+        />
+        <Text style={[styles.googleBtnText, tw`pb-0.5`]}>
+          Sign in with Google
+        </Text>
+      </View>
+    </Pressable>
   );
 };
 
-export default GoogleSignIn;
+export default GoogleSignInComp;

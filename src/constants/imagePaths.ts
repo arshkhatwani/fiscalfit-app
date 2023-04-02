@@ -25,4 +25,9 @@ export default {
   icRetirement: require('../assets/icons/retirement.png'),
   icTravelVac: require('../assets/icons/travel-vacation-plan.png'),
   icVehiclePlan: require('../assets/icons/vehicle-plan.png'),
+
+  imgIntro: require('../assets/images/intro-img.jpg'),
+  imgIntro2: require('../assets/images/intro2.png'),
+
+  icGoogle: require('../assets/icons/google.png'),
 };

@@ -6,6 +6,9 @@ import convertToBudgetBody, {
 } from '../../utils/convertToBudgetBody';
 import {
   categoryTransactionsReducer,
+  deleteBudgetFulfilled,
+  deleteBudgetPending,
+  deleteBudgetRejected,
   getBudgetsFulfilled,
   getBudgetsPending,
   getBudgetsRejected,
@@ -58,6 +61,24 @@ export const getBudgets = createAsyncThunk<
   }
 });
 
+export const deleteBudget = createAsyncThunk<
+  { message: string; bid: string },
+  string,
+  { state: RootState }
+>('budget/deleteBudget', async (bid, thunkAPI) => {
+  try {
+    const collectionRef = firestore().collection('Budget');
+    const querySnapshot = await collectionRef.where('bid', '==', bid).get();
+    querySnapshot.forEach(doc => {
+      doc.ref.delete();
+    });
+    return thunkAPI.fulfillWithValue({ message: 'Budget deleted!', bid });
+  } catch (e) {
+    console.log(e);
+    return thunkAPI.rejectWithValue('Could not delete budget');
+  }
+});
+
 const initialState: BudgetState = {
   isLoading: false,
   userBudgets: [],
@@ -78,6 +99,10 @@ const budgetSlice = createSlice({
     builder.addCase(getBudgets.pending, getBudgetsPending);
     builder.addCase(getBudgets.rejected, getBudgetsRejected);
     builder.addCase(getBudgets.fulfilled, getBudgetsFulfilled);
+
+    builder.addCase(deleteBudget.pending, deleteBudgetPending);
+    builder.addCase(deleteBudget.rejected, deleteBudgetRejected);
+    builder.addCase(deleteBudget.fulfilled, deleteBudgetFulfilled);
   },
 });
 

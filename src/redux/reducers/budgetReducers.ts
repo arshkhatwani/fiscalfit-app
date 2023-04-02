@@ -63,3 +63,27 @@ export const categoryTransactionsReducer = (
 
   state.categoryTransactions = categoryTransactions;
 };
+
+export const deleteBudgetPending = (state: BudgetState) => {
+  state.isLoading = true;
+  // console.log('loading');
+};
+
+export const deleteBudgetRejected = (
+  state: BudgetState,
+  action: PayloadAction<any>,
+) => {
+  state.isLoading = false;
+  console.log(action.payload);
+};
+
+export const deleteBudgetFulfilled = (
+  state: BudgetState,
+  action: PayloadAction<{ bid: string; message: string }>,
+) => {
+  state.userBudgets = state.userBudgets.filter(
+    el => el.bid !== action.payload.bid,
+  );
+  state.isLoading = false;
+  console.log(action.payload.message);
+};

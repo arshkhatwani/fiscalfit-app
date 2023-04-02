@@ -13,7 +13,7 @@ const TransactionHeader = () => {
   const { userTransactions } = useSelector(
     (state: RootState) => state.transactions,
   );
-  const totalBalance = getTotalBalance(userTransactions);
+  const { expense, earning } = getTotalBalance(userTransactions);
 
   return (
     <View>
@@ -24,10 +24,18 @@ const TransactionHeader = () => {
         end={{ x: 0, y: 0 }}>
         <Text style={[styles.heading, tw`mb-6`]}>Transaction</Text>
 
-        <View>
-          <Text style={styles.balanceHeading}>TOTAL BALANCE</Text>
+        <View style={tw`flex flex-row flex-wrap items-center justify-between`}>
+          <View>
+            <Text style={styles.balanceHeading}>TOTAL EARNINGS</Text>
 
-          <Text style={styles.balance}>{`₹ ${totalBalance}`}</Text>
+            <Text style={styles.balance}>{`₹ ${earning}`}</Text>
+          </View>
+
+          <View>
+            <Text style={styles.balanceHeading}>TOTAL EXPENSES</Text>
+
+            <Text style={styles.balance}>{`₹ ${expense}`}</Text>
+          </View>
         </View>
       </LinearGradient>
     </View>

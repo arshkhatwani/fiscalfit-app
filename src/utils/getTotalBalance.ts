@@ -1,15 +1,18 @@
 import { TransactionBody } from './convertToTransactionBody';
 
-function getTotalBalance(items: TransactionBody[]): number {
-  let total = 0;
+function getTotalBalance(items: TransactionBody[]): {
+  expense: number;
+  earning: number;
+} {
+  let res = { expense: 0, earning: 0 };
   items.forEach(item => {
     if (item.spend) {
-      total -= item.price;
+      res.expense += item.price;
     } else {
-      total += item.price;
+      res.earning += item.price;
     }
   });
-  return total;
+  return res;
 }
 
 export default getTotalBalance;

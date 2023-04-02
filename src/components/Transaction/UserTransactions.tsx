@@ -38,13 +38,14 @@ const UserTransactions = () => {
 
       {userTransactions.map((item, index) => {
         return (
-          <View key={index}>
+          <View key={item.tid}>
             <TransactionItem
               heading={item.name}
               date={item.date}
               price={item.price}
               spend={item.spend}
               category={item.category}
+              tid={item.tid}
             />
 
             {index < userTransactions.length - 1 && (

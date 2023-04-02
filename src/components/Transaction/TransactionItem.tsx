@@ -12,6 +12,7 @@ interface Props {
   date: string;
   spend: boolean;
   category: string;
+  tid: string;
 }
 
 const TransactionItem: FC<Props> = ({
@@ -20,6 +21,7 @@ const TransactionItem: FC<Props> = ({
   date,
   spend,
   category,
+  tid,
 }) => {
   const categoryIcon =
     categoriesIcons[category as keyof typeof categoriesIcons];

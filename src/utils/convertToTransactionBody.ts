@@ -1,5 +1,6 @@
 import { FormFields } from '../components/Transaction/NewTransaction';
 import formatDate from './formatDate';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface TransactionBody {
   name: string;
@@ -8,6 +9,7 @@ export interface TransactionBody {
   date: string;
   category: string;
   uid: string;
+  tid: string;
 }
 
 const convertToTransactionBody = (body: FormFields, uid: string) => {
@@ -18,6 +20,7 @@ const convertToTransactionBody = (body: FormFields, uid: string) => {
     date: formatDate(body.date),
     category: body.category,
     uid: uid,
+    tid: uuidv4(),
   };
   return res;
 };

@@ -15,3 +15,6 @@ export const darkHeading = '#2C3E50';
 export const progressGradient = ['#380036', '#0CBABA'];
 
 export const progressEmpty = '#EEEEEE';
+
+export const introBlue = '#002161';
+export const introTan = '#D2B48C';

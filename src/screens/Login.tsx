@@ -8,33 +8,30 @@ import imagePaths from '../constants/imagePaths';
 
 const Login = () => {
   return (
-    <View style={[tw`flex-1`, { backgroundColor: '#fff' }]}>
-      <View style={[tw`pt-5 px-5 flex flex-col`, { zIndex: 2 }]}>
+    <View style={[tw`flex-1`, styles.parentContainer]}>
+      <View style={[tw`flex-4 pt-5 px-5 flex flex-col items-center`]}>
         <View style={tw`mb-10`}>
           <Text style={styles.nameHeading}>FiscalFit</Text>
         </View>
 
         <Image style={[styles.img, tw`mb-12`]} source={imagePaths.imgIntro} />
-
-        <View style={tw`mb-12`}>
-          <Text style={styles.introText}>
-            Simplify your finances and plan for your future.
-          </Text>
-        </View>
-
-        <View>
-          <GoogleSignInComp />
-        </View>
       </View>
-      <Image
-        source={imagePaths.imgIntro2}
-        style={{
-          width: '100%',
-          height: '90%',
-          position: 'absolute',
-          bottom: 0,
-        }}
-      />
+
+      <View style={[tw`flex-5`]}>
+        <View style={tw`px-5 pt-5`}>
+          <View style={tw`mb-12`}>
+            <Text style={styles.introText}>
+              Simplify your finances and plan for your future.
+            </Text>
+          </View>
+
+          <View>
+            <GoogleSignInComp />
+          </View>
+        </View>
+
+        <Image source={imagePaths.imgIntro2} style={styles.bgImageStyle} />
+      </View>
     </View>
   );
 };

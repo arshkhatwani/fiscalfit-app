@@ -1,6 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { PlanBody } from '../../utils/convertToPlanBody';
 import { PlansState } from '../slices/planSlice';
+import Toast from 'react-native-toast-message';
 
 export const savePlanPending = (state: PlansState) => {
   state.isLoading = true;
@@ -13,6 +14,7 @@ export const savePlanRejected = (
 ) => {
   state.isLoading = false;
   console.log(action.payload);
+  Toast.show({ type: 'default', text1: action.payload });
 };
 
 export const savePlanFulfilled = (
@@ -21,6 +23,7 @@ export const savePlanFulfilled = (
 ) => {
   state.isLoading = false;
   console.log(action.payload);
+  Toast.show({ type: 'default', text1: action.payload });
 };
 
 export const getPlansPending = (state: PlansState) => {
@@ -119,6 +122,7 @@ export const deletePlanRejected = (
 ) => {
   state.isLoading = false;
   console.log(action.payload);
+  Toast.show({ type: 'default', text1: action.payload });
 };
 
 export const deletePlanFulfilled = (
@@ -128,4 +132,5 @@ export const deletePlanFulfilled = (
   state.userPlans = state.userPlans.filter(el => el.pid !== action.payload.pid);
   state.isLoading = false;
   console.log(action.payload.message);
+  Toast.show({ type: 'default', text1: action.payload.message });
 };

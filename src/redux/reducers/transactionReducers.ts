@@ -2,6 +2,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { TransactionBody } from '../../utils/convertToTransactionBody';
 import { sortByDateNewestFirst } from '../../utils/sortTransactionBodyArray';
 import { TransactionsState } from '../slices/transactionSlice';
+import Toast from 'react-native-toast-message';
 
 export const saveTransactionPending = (state: TransactionsState) => {
   state.isLoading = true;
@@ -14,6 +15,7 @@ export const saveTransactionRejected = (
 ) => {
   state.isLoading = false;
   console.log(action.payload);
+  Toast.show({ type: 'default', text1: action.payload });
 };
 
 export const saveTransactionFulfilled = (
@@ -22,6 +24,7 @@ export const saveTransactionFulfilled = (
 ) => {
   state.isLoading = false;
   console.log(action.payload);
+  Toast.show({ type: 'default', text1: action.payload });
 };
 
 export const getTransactionsPending = (state: TransactionsState) => {
@@ -55,7 +58,7 @@ export const deleteTransactionRejected = (
   action: PayloadAction<any>,
 ) => {
   state.isLoading = false;
-  console.log(action.payload);
+  Toast.show({ type: 'default', text1: action.payload });
 };
 
 export const deleteTransactionFulfilled = (
@@ -66,5 +69,5 @@ export const deleteTransactionFulfilled = (
     el => el.tid !== action.payload.tid,
   );
   state.isLoading = false;
-  console.log(action.payload.message);
+  Toast.show({ type: 'default', text1: action.payload.message });
 };

@@ -3,6 +3,7 @@ import transactionCategories from '../../constants/transactionCategories';
 import { BudgetBody } from '../../utils/convertToBudgetBody';
 import { TransactionBody } from '../../utils/convertToTransactionBody';
 import { BudgetState } from '../slices/budgetSlice';
+import Toast from 'react-native-toast-message';
 
 export const saveBudgetPending = (state: BudgetState) => {
   state.isLoading = true;
@@ -15,6 +16,7 @@ export const saveBudgetRejected = (
 ) => {
   state.isLoading = false;
   console.log(action.payload);
+  Toast.show({ type: 'default', text1: action.payload });
 };
 
 export const saveBudgetFulfilled = (
@@ -23,6 +25,7 @@ export const saveBudgetFulfilled = (
 ) => {
   state.isLoading = false;
   console.log(action.payload);
+  Toast.show({ type: 'default', text1: action.payload });
 };
 
 export const getBudgetsPending = (state: BudgetState) => {
@@ -75,6 +78,7 @@ export const deleteBudgetRejected = (
 ) => {
   state.isLoading = false;
   console.log(action.payload);
+  Toast.show({ type: 'default', text1: action.payload });
 };
 
 export const deleteBudgetFulfilled = (
@@ -86,4 +90,5 @@ export const deleteBudgetFulfilled = (
   );
   state.isLoading = false;
   console.log(action.payload.message);
+  Toast.show({ type: 'default', text1: action.payload.message });
 };

@@ -7,6 +7,7 @@ import store from './src/redux/store';
 import { Provider as PaperProvider } from 'react-native-paper';
 import theme from './src/constants/appTheme';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import ToastComp from './src/components/ToastComp';
 
 function App(): JSX.Element {
   return (
@@ -16,6 +17,7 @@ function App(): JSX.Element {
           <NavigationContainer>
             <SafeAreaView style={{ flex: 1 }}>
               <RootNavigation />
+              <ToastComp />
             </SafeAreaView>
           </NavigationContainer>
         </PaperProvider>

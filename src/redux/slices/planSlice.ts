@@ -9,6 +9,9 @@ import {
   completePlanFulfilled,
   completePlanPending,
   completePlanRejected,
+  deletePlanFulfilled,
+  deletePlanPending,
+  deletePlanRejected,
   depositModalReducer,
   depositPidReducer,
   getPlansFulfilled,
@@ -102,6 +105,24 @@ export const completePlan = createAsyncThunk<
   }
 });
 
+export const deletePlan = createAsyncThunk<
+  { message: string; pid: string },
+  string,
+  { state: RootState }
+>('plans/deletePlan', async (pid, thunkAPI) => {
+  try {
+    const collectionRef = firestore().collection('Plans');
+    const querySnapshot = await collectionRef.where('pid', '==', pid).get();
+    querySnapshot.forEach(doc => {
+      doc.ref.delete();
+    });
+    return thunkAPI.fulfillWithValue({ message: 'Plan deleted!', pid });
+  } catch (e) {
+    console.log(e);
+    return thunkAPI.rejectWithValue('Could not delete plan');
+  }
+});
+
 const initialState: PlansState = {
   isLoading: false,
   userPlans: [],
@@ -132,6 +153,10 @@ const planSlice = createSlice({
     builder.addCase(completePlan.pending, completePlanPending);
     builder.addCase(completePlan.rejected, completePlanRejected);
     builder.addCase(completePlan.fulfilled, completePlanFulfilled);
+
+    builder.addCase(deletePlan.pending, deletePlanPending);
+    builder.addCase(deletePlan.rejected, deletePlanRejected);
+    builder.addCase(deletePlan.fulfilled, deletePlanFulfilled);
   },
 });
 

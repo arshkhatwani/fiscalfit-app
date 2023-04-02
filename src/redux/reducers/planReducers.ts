@@ -107,3 +107,25 @@ export const completePlanFulfilled = (
   state.depositModalShow = false;
   console.log(action.payload.message);
 };
+
+export const deletePlanPending = (state: PlansState) => {
+  state.isLoading = true;
+  // console.log('loading');
+};
+
+export const deletePlanRejected = (
+  state: PlansState,
+  action: PayloadAction<any>,
+) => {
+  state.isLoading = false;
+  console.log(action.payload);
+};
+
+export const deletePlanFulfilled = (
+  state: PlansState,
+  action: PayloadAction<{ pid: string; message: string }>,
+) => {
+  state.userPlans = state.userPlans.filter(el => el.pid !== action.payload.pid);
+  state.isLoading = false;
+  console.log(action.payload.message);
+};

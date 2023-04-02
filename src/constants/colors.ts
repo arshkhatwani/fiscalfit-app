@@ -5,8 +5,6 @@ export const earnColor = '#3f8f29';
 
 export const whiteColor = '#ffffff';
 
-export const headerGradient = ['#000000', '#2C3E50'];
-
 export const greyHeading = '#b5b5b5';
 export const greyDarkHeading = '#636363';
 
@@ -18,3 +16,5 @@ export const progressEmpty = '#EEEEEE';
 
 export const introBlue = '#002161';
 export const introTan = '#D2B48C';
+
+export const headerGradient = ['#000000', introBlue];

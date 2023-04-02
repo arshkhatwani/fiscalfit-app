@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import { Image } from 'react-native';
-import { disabledColor } from '../constants/colors';
+import { disabledColor, introBlue } from '../constants/colors';
 import { font } from '../constants/fonts';
 import imagePaths from '../constants/imagePaths';
 import Home from '../screens/Home';
@@ -23,13 +23,13 @@ const LoggedInNavigation: React.FC = () => {
         name="Home"
         component={Home}
         options={{
-          tabBarActiveTintColor: '#000000',
+          tabBarActiveTintColor: introBlue,
           tabBarIcon: ({ focused }) => (
             <Image
               source={imagePaths.homeTabIcon}
               style={[
                 styles.iconImg,
-                { tintColor: focused ? '#000000' : disabledColor },
+                { tintColor: focused ? introBlue : disabledColor },
               ]}
             />
           ),
@@ -39,13 +39,13 @@ const LoggedInNavigation: React.FC = () => {
         name="Transaction"
         component={TransactionNavigation}
         options={{
-          tabBarActiveTintColor: '#000000',
+          tabBarActiveTintColor: introBlue,
           tabBarIcon: ({ focused }) => (
             <Image
               source={imagePaths.transactionIcon}
               style={[
                 styles.iconImg,
-                { tintColor: focused ? '#000000' : disabledColor },
+                { tintColor: focused ? introBlue : disabledColor },
               ]}
             />
           ),
@@ -55,13 +55,13 @@ const LoggedInNavigation: React.FC = () => {
         name="Plan"
         component={PlanNavigation}
         options={{
-          tabBarActiveTintColor: '#000000',
+          tabBarActiveTintColor: introBlue,
           tabBarIcon: ({ focused }) => (
             <Image
               source={imagePaths.planIcon}
               style={[
                 styles.iconImg,
-                { tintColor: focused ? '#000000' : disabledColor },
+                { tintColor: focused ? introBlue : disabledColor },
               ]}
             />
           ),
@@ -71,13 +71,13 @@ const LoggedInNavigation: React.FC = () => {
         name="Budget"
         component={BudgetNavigation}
         options={{
-          tabBarActiveTintColor: '#000000',
+          tabBarActiveTintColor: introBlue,
           tabBarIcon: ({ focused }) => (
             <Image
               source={imagePaths.budgetIcon}
               style={[
                 styles.iconImg,
-                { tintColor: focused ? '#000000' : disabledColor },
+                { tintColor: focused ? introBlue : disabledColor },
               ]}
             />
           ),

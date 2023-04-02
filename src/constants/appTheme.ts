@@ -3,6 +3,7 @@ import {
   MD2LightTheme,
   DefaultTheme,
 } from 'react-native-paper';
+import { introBlue } from './colors';
 
 const font = {
   regular: {
@@ -39,7 +40,7 @@ const theme: Object = {
   roundness: 10,
   colors: {
     ...MD2LightTheme.colors,
-    primary: '#12263b',
+    primary: introBlue,
     accent: '#24405e',
   },
 };

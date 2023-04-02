@@ -1,4 +1,4 @@
-import { greyHeading, whiteColor } from '../constants/colors';
+import { greyHeading, introTan, whiteColor } from '../constants/colors';
 import { font } from '../constants/fonts';
 
 const styles = {
@@ -6,7 +6,7 @@ const styles = {
     fontFamily: font.semiBold.fontFamily,
     fontSize: 22,
     textAlign: 'center' as 'center',
-    color: whiteColor,
+    color: introTan,
   },
 
   balanceHeading: {

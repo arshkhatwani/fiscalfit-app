@@ -6,6 +6,9 @@ import convertToTransactionBody, {
 import { RootState } from '../store';
 import { FormFields } from '../../components/Transaction/NewTransaction';
 import {
+  deleteTransactionFulfilled,
+  deleteTransactionPending,
+  deleteTransactionRejected,
   getTransactionsFulfilled,
   getTransactionsPending,
   getTransactionsRejected,
@@ -49,6 +52,24 @@ export const getTransactions = createAsyncThunk<
   }
 });
 
+export const deleteTransaction = createAsyncThunk<
+  { message: string; tid: string },
+  string,
+  { state: RootState }
+>('transactions/deleteTransaction', async (tid, thunkAPI) => {
+  try {
+    const collectionRef = firestore().collection('Transactions');
+    const querySnapshot = await collectionRef.where('tid', '==', tid).get();
+    querySnapshot.forEach(doc => {
+      doc.ref.delete();
+    });
+    return thunkAPI.fulfillWithValue({ message: 'Transaction deleted!', tid });
+  } catch (e) {
+    console.log(e);
+    return thunkAPI.rejectWithValue('Could not delete transaction');
+  }
+});
+
 export interface TransactionsState {
   isLoading: boolean;
   userTransactions: TransactionBody[];
@@ -71,6 +92,10 @@ const transactionSlice = createSlice({
     builder.addCase(getTransactions.pending, getTransactionsPending);
     builder.addCase(getTransactions.rejected, getTransactionsRejected);
     builder.addCase(getTransactions.fulfilled, getTransactionsFulfilled);
+
+    builder.addCase(deleteTransaction.pending, deleteTransactionPending);
+    builder.addCase(deleteTransaction.rejected, deleteTransactionRejected);
+    builder.addCase(deleteTransaction.fulfilled, deleteTransactionFulfilled);
   },
 });
 

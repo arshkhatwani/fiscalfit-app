@@ -1,7 +1,7 @@
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import React, { useEffect } from 'react';
-import { Image, Pressable, View } from 'react-native';
+import { Image, TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 import tw from 'twrnc';
@@ -59,7 +59,7 @@ const GoogleSignInComp = () => {
       .catch(e => console.log(e));
 
   return (
-    <Pressable onPress={onPress}>
+    <TouchableOpacity activeOpacity={0.6} onPress={onPress}>
       <View
         style={[
           styles.googleBtnContainer,
@@ -73,7 +73,7 @@ const GoogleSignInComp = () => {
           Sign in with Google
         </Text>
       </View>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 

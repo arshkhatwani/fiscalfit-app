@@ -4,9 +4,9 @@ import { Image } from 'react-native';
 import { disabledColor, introBlue } from '../constants/colors';
 import { font } from '../constants/fonts';
 import imagePaths from '../constants/imagePaths';
-import Home from '../screens/Home';
 import styles from '../styles/LoggedInNavigation';
 import BudgetNavigation from './BudgetNavigation';
+import HomeNavigation from './HomeNavigation';
 import PlanNavigation from './PlanNavigation';
 import TransactionNavigation from './TransactionNavigation';
 
@@ -21,7 +21,7 @@ const LoggedInNavigation: React.FC = () => {
       }}>
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={HomeNavigation}
         options={{
           tabBarActiveTintColor: introBlue,
           tabBarIcon: ({ focused }) => (

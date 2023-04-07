@@ -3,7 +3,7 @@ import { Button, IconButton, MD2Colors, Text } from 'react-native-paper';
 import React, { FC } from 'react';
 import tw from 'twrnc';
 import styles from '../../styles/PlanCard';
-import ProgressBar from '../ProgressBar';
+import ProgressBar from '../General/ProgressBar';
 import { categoryIcons } from '../../constants/planCategories';
 import { useAppDispatch } from '../../redux/store';
 import {

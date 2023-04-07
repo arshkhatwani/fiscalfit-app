@@ -7,7 +7,7 @@ import store from './src/redux/store';
 import { Provider as PaperProvider } from 'react-native-paper';
 import theme from './src/constants/appTheme';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import ToastComp from './src/components/ToastComp';
+import ToastComp from './src/components/General/ToastComp';
 
 function App(): JSX.Element {
   return (

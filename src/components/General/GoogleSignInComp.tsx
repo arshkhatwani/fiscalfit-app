@@ -5,9 +5,9 @@ import { Image, TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 import tw from 'twrnc';
-import imagePaths from '../constants/imagePaths';
-import { logoutUser, setAuth, setUser } from '../redux/slices/authSlice';
-import styles from '../styles/Login';
+import imagePaths from '../../constants/imagePaths';
+import { logoutUser, setAuth, setUser } from '../../redux/slices/authSlice';
+import styles from '../../styles/Login';
 
 GoogleSignin.configure({
   webClientId:

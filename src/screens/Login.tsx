@@ -1,7 +1,7 @@
 import { View, Image } from 'react-native';
 import { Text } from 'react-native-paper';
 import React from 'react';
-import GoogleSignInComp from '../components/GoogleSignInComp';
+import GoogleSignInComp from '../components/General/GoogleSignInComp';
 import tw from 'twrnc';
 import styles from '../styles/Login';
 import imagePaths from '../constants/imagePaths';

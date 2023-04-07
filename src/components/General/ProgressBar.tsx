@@ -1,8 +1,8 @@
 import { View } from 'react-native';
 import React, { FC } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import { progressGradient } from '../constants/colors';
-import styles from '../styles/ProgressBar';
+import { progressGradient } from '../../constants/colors';
+import styles from '../../styles/ProgressBar';
 
 interface Props {
   maxVal: number;

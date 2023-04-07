@@ -6,7 +6,7 @@ import tw from 'twrnc';
 import { categoriesIcons } from '../../constants/transactionCategories';
 import { RootState, useAppDispatch } from '../../redux/store';
 import styles from '../../styles/PlanCard';
-import ProgressBar from '../ProgressBar';
+import ProgressBar from '../General/ProgressBar';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { deleteBudget } from '../../redux/slices/budgetSlice';
 

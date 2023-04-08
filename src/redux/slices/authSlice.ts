@@ -1,4 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import auth from '@react-native-firebase/auth';
+import { RootState } from '../store';
+import Toast from 'react-native-toast-message';
 
 interface User {
   name: string;
@@ -11,6 +14,19 @@ interface AuthState {
   isAuth: boolean;
   user: User;
 }
+
+export const logoutUser = createAsyncThunk<string, void, { state: RootState }>(
+  'auth/logoutUser',
+  async (_, thunkAPI) => {
+    try {
+      await auth().signOut();
+      return thunkAPI.fulfillWithValue('User signed out successfully!');
+    } catch (e) {
+      console.log(e);
+      return thunkAPI.rejectWithValue('Could not sign out');
+    }
+  },
+);
 
 const initialState: AuthState = {
   isAuth: false,
@@ -34,12 +50,23 @@ const authSlice = createSlice({
       state.user = payload;
     },
 
-    logoutUser: state => {
+    resetUser: state => {
       return initialState;
     },
   },
+
+  extraReducers: builder => {
+    builder.addCase(logoutUser.fulfilled, (state, action) => {
+      Toast.show({ type: 'default', text1: action.payload });
+      return initialState;
+    });
+
+    builder.addCase(logoutUser.rejected, (state, action) => {
+      Toast.show({ type: 'default', text1: action.payload as string });
+    });
+  },
 });
 
-export const { setAuth, setUser, logoutUser } = authSlice.actions;
+export const { setAuth, setUser, resetUser } = authSlice.actions;
 
 export default authSlice;

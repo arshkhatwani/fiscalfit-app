@@ -6,14 +6,16 @@ import Icon from 'react-native-vector-icons/Entypo';
 import { useSelector } from 'react-redux';
 import tw from 'twrnc';
 import FeatureCard from '../components/General/FeatureCard';
-import { RootState } from '../redux/store';
+import { RootState, useAppDispatch } from '../redux/store';
 import styles from '../styles/Home';
+import { logoutUser } from '../redux/slices/authSlice';
 
 const defaultProfile =
   'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png';
 
 const Home = () => {
   const { user } = useSelector((state: RootState) => state.auth);
+  const dispatch = useAppDispatch();
 
   return (
     <ScrollView style={tw``}>
@@ -29,7 +31,7 @@ const Home = () => {
           textColor="red"
           style={styles.logoutBtn}
           labelStyle={styles.logoutLabel}
-          onPress={() => {}}>
+          onPress={() => dispatch(logoutUser())}>
           Logout
         </Button>
       </View>

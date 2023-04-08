@@ -6,7 +6,7 @@ import { Text } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 import tw from 'twrnc';
 import imagePaths from '../../constants/imagePaths';
-import { logoutUser, setAuth, setUser } from '../../redux/slices/authSlice';
+import { resetUser, setAuth, setUser } from '../../redux/slices/authSlice';
 import styles from '../../styles/Login';
 
 GoogleSignin.configure({
@@ -33,7 +33,7 @@ const GoogleSignInComp = () => {
 
   function onAuthStateChanged(user: any) {
     if (user === null) {
-      dispatch(logoutUser());
+      dispatch(resetUser());
       return;
     }
 

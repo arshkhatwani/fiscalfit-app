@@ -9,6 +9,8 @@ import FeatureCard from '../components/General/FeatureCard';
 import { RootState, useAppDispatch } from '../redux/store';
 import styles from '../styles/Home';
 import { logoutUser } from '../redux/slices/authSlice';
+import { useNavigation } from '@react-navigation/native';
+import { HELP } from '../constants/navigationLinks';
 
 const defaultProfile =
   'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png';
@@ -16,6 +18,7 @@ const defaultProfile =
 const Home = () => {
   const { user } = useSelector((state: RootState) => state.auth);
   const dispatch = useAppDispatch();
+  const navigation = useNavigation();
 
   return (
     <ScrollView style={tw``}>
@@ -63,7 +66,9 @@ const Home = () => {
       </Swiper>
 
       <View style={tw`px-5`}>
-        <TouchableOpacity style={tw`py-3 flex flex-row items-center`}>
+        <TouchableOpacity
+          style={tw`py-3 flex flex-row items-center`}
+          onPress={() => navigation.navigate(HELP)}>
           <Text style={[styles.helpLabel, tw`pb-0.5 mr-2`]}>Help</Text>
 
           <Icon

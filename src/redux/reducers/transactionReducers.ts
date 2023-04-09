@@ -44,7 +44,7 @@ export const getTransactionsFulfilled = (
   state: TransactionsState,
   action: PayloadAction<TransactionBody[]>,
 ) => {
-  state.isLoading = true;
+  state.isLoading = false;
   state.userTransactions = sortByDateNewestFirst(action.payload);
 };
 

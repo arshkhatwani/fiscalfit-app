@@ -43,7 +43,7 @@ export const getPlansFulfilled = (
   state: PlansState,
   action: PayloadAction<PlanBody[]>,
 ) => {
-  state.isLoading = true;
+  state.isLoading = false;
   state.userPlans = action.payload;
 };
 

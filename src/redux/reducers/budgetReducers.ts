@@ -45,7 +45,7 @@ export const getBudgetsFulfilled = (
   state: BudgetState,
   action: PayloadAction<BudgetBody[]>,
 ) => {
-  state.isLoading = true;
+  state.isLoading = false;
   state.userBudgets = action.payload;
 };
 

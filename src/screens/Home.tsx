@@ -11,6 +11,7 @@ import styles from '../styles/Home';
 import { logoutUser } from '../redux/slices/authSlice';
 import { useNavigation } from '@react-navigation/native';
 import { HELP } from '../constants/navigationLinks';
+import TransactionChart from '../components/Transaction/TransactionChart';
 
 const defaultProfile =
   'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png';
@@ -64,6 +65,8 @@ const Home = () => {
           subHeading="Stay on top of your spending by setting category-specific limits."
         />
       </Swiper>
+
+      <TransactionChart />
 
       <View style={tw`px-5`}>
         <TouchableOpacity

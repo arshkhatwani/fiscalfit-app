@@ -20,6 +20,12 @@ const styles = {
     fontSize: 24,
   },
 
+  heading: {
+    fontFamily: font.bold.fontFamily,
+    color: introBlue,
+    fontSize: 22,
+  },
+
   helpLabel: {
     fontFamily: font.medium.fontFamily,
     fontSize: 18,

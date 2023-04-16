@@ -1,4 +1,9 @@
-import { darkHeading, greyDarkHeading, whiteColor } from '../constants/colors';
+import {
+  darkHeading,
+  greyDarkHeading,
+  spendColor,
+  whiteColor,
+} from '../constants/colors';
 import { font } from '../constants/fonts';
 
 const styles = {
@@ -40,6 +45,12 @@ const styles = {
     shadowRadius: 3.84,
     elevation: 5,
     backgroundColor: whiteColor,
+  },
+
+  exceededText: {
+    color: spendColor,
+    fontSize: 16,
+    fontFamily: font.semiBold.fontFamily,
   },
 };
 

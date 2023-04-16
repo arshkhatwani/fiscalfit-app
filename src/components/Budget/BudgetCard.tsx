@@ -56,14 +56,24 @@ const BudgetCard: FC<Props> = ({ category, target, bid }) => {
           </View>
         </View>
 
-        <View style={tw`flex flex-row items-center justify-between mb-3`}>
-          <Text style={styles.currentSaving}>Budget ₹ {target}</Text>
-          <Text style={styles.targetAmt}>Remaining ₹ {target - spend}</Text>
-        </View>
+        {target < spend && (
+          <Text style={[tw`text-center mb-2`, styles.exceededText]}>
+            Budget exceeded!
+          </Text>
+        )}
 
-        <View style={tw`mb-3`}>
-          <ProgressBar curVal={spend} maxVal={target} />
-        </View>
+        {target >= spend && (
+          <>
+            <View style={tw`flex flex-row items-center justify-between mb-3`}>
+              <Text style={styles.currentSaving}>Budget ₹ {target}</Text>
+              <Text style={styles.targetAmt}>Remaining ₹ {target - spend}</Text>
+            </View>
+
+            <View style={tw`mb-3`}>
+              <ProgressBar curVal={spend} maxVal={target} />
+            </View>
+          </>
+        )}
       </View>
     </Swipeable>
   );

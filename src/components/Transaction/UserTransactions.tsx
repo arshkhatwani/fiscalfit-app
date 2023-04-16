@@ -10,6 +10,7 @@ import PillBtn from '../Buttons/PillBtn';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { NEW_TRANSACTION } from '../../constants/navigationLinks';
 import styles from '../../styles/UserTransactions';
+import EmptyState from '../General/EmptyState';
 
 const UserTransactions = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -35,6 +36,8 @@ const UserTransactions = () => {
           onPress={() => navigation.navigate(NEW_TRANSACTION)}
         />
       </View>
+
+      {userTransactions.length === 0 && <EmptyState label="No transactions" />}
 
       {userTransactions.map((item, index) => {
         return (

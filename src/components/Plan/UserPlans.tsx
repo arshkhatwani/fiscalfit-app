@@ -11,6 +11,7 @@ import { Text, Switch } from 'react-native-paper';
 import styles from '../../styles/UserTransactions';
 import { NEW_PLAN } from '../../constants/navigationLinks';
 import DepositModal from './DepositModal';
+import EmptyState from '../General/EmptyState';
 
 const UserPlans = () => {
   const isFocused = useIsFocused();
@@ -41,10 +42,14 @@ const UserPlans = () => {
         />
       </View>
 
-      <View style={tw`flex flex-row items-center mb-4`}>
-        <Text style={tw`mr-2`}>Completed Plans</Text>
-        <Switch value={showCompleted} onValueChange={onToggleSwitch} />
-      </View>
+      {userPlans.length === 0 && <EmptyState label="No plans" />}
+
+      {userPlans.length > 0 && (
+        <View style={tw`flex flex-row items-center mb-4`}>
+          <Text style={tw`mr-2`}>Completed Plans</Text>
+          <Switch value={showCompleted} onValueChange={onToggleSwitch} />
+        </View>
+      )}
 
       {userPlans.map(item => {
         return (

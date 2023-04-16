@@ -14,6 +14,7 @@ import { RootState, useAppDispatch } from '../../redux/store';
 import styles from '../../styles/UserTransactions';
 import PillBtn from '../Buttons/PillBtn';
 import BudgetCard from './BudgetCard';
+import EmptyState from '../General/EmptyState';
 
 const UserBudget = () => {
   const dispatch = useAppDispatch();
@@ -46,6 +47,8 @@ const UserBudget = () => {
           onPress={() => navigation.navigate(NEW_BUDGET)}
         />
       </View>
+
+      {userBudgets.length === 0 && <EmptyState label="No budgets" />}
 
       {userBudgets.map(item => (
         <BudgetCard

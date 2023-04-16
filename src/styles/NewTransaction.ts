@@ -1,4 +1,4 @@
-import { whiteColor } from '../constants/colors';
+import { earnColor, spendColor, whiteColor } from '../constants/colors';
 import { font } from '../constants/fonts';
 
 const styles = {
@@ -8,13 +8,13 @@ const styles = {
   },
 
   spendBtn: {
-    backgroundColor: 'red',
-    borderColor: 'red',
+    backgroundColor: spendColor,
+    borderColor: spendColor,
   },
 
   earnBtn: {
-    backgroundColor: 'green',
-    borderColor: 'green',
+    backgroundColor: earnColor,
+    borderColor: earnColor,
   },
 
   btnLabelActive: {
